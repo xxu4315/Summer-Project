@@ -12,7 +12,7 @@
 <font size="24" color="red">Register</font><br/> 
 Email:<input type="text" name="email" /><br/>  
 Username:<input type="text" name="userName" /><br/>  
-<input type="submit" value="submit" /><br/>  
+<input type="submit" value="submit" />May 25, 2016<br/>  
 </form>  
 </body>
 </html>
