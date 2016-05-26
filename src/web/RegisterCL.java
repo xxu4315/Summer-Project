@@ -44,22 +44,20 @@ public class RegisterCL extends HttpServlet {
 					//request.getRequestDispatcher("Register.jsp").forward(request, response);
 					out.println("Email-address already exist");
 					out.println("<br/>");
-					out.println("<a href=\"http://localhost:8080/MyWeb/Register.jsp\" target=_self >Go back to Register Page</a>");
+					out.println("<a href=\"http://localhost:8080/MyWeb/error.jsp\" target=_self >Go back to Register Page</a>");
 				}
 				else{
 					String regex="[a-zA-Z0-9_\\-\\.]+@(stevens)+(\\.(edu))" ;
 					if(Email.matches(regex)){
 						System.out.println("yes");
-						out.println("Register successed, please activate and login !");
-					out.println("<br/>");
-					out.println("<input type=aaa> </input>");
-					out.println("<a href=\"http://localhost:8080/MyWeb/Login.jsp\" target=_self >Back to login page</a>");
+						request.setAttribute("Email", Email);
+						request.getRequestDispatcher("/Success.jsp").forward(request,response); 
 					}
 					else{
 						System.out.println("no");
 						out.println("Invalid email address, you should need to use your stevens email address to register!");
 						out.println("<br/>");
-						out.println("<a href=\"http://localhost:8080/MyWeb/Register.jsp\" target=_self >Go back to Register Page</a>");
+						out.println("<a href=\"http://localhost:8080/MyWeb/error.jsp\" target=_self >Go back to Register Page</a>");
 					}
 				}
 			}
