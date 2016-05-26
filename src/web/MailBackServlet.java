@@ -15,14 +15,14 @@ public class MailBackServlet extends HttpServlet {
             throws ServletException, IOException {  
         String registerID = request.getParameter("registerId");  
         if(registerID == null){  
-            request.getRequestDispatcher("/Login.jsp").forward(request,response);  
+            request.getRequestDispatcher("/index.jsp").forward(request,response);  
            return ;  
         }  
          
         String registerName = (String)request.getSession().getAttribute(registerID);  
          
        if(registerName == null || registerName.equals("")){  
-            request.getRequestDispatcher("/Login.jsp").forward(request,response);  
+            request.getRequestDispatcher("/index.jsp").forward(request,response);  
             return ;  
         }  
          

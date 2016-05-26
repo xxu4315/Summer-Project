@@ -27,7 +27,7 @@ public RegisterServlet() {
 public void doGet(HttpServletRequest request, HttpServletResponse response)  
            throws ServletException, IOException {  
     System.out.print("yeah");
-        String toMail = request.getParameter("email") + "@stevens.edu";  
+        String toMail = request.getParameter("email");  
         String registerName = request.getParameter("userName");  
     
        String userName = "lujunye09221990@163.com";  

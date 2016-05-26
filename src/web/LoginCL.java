@@ -34,7 +34,7 @@ public class LoginCL extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		//out.println("Hello world!");
 		String Email = request.getParameter("email");
-		Email += "@stevens.edu";
+//		Email += "@stevens.edu";
 		//Email.toLowerCase();
 		String PassWord = request.getParameter("password");
 		//out.println(UserName+" "+PassWord);
@@ -51,7 +51,7 @@ public class LoginCL extends HttpServlet {
 			hs.setMaxInactiveInterval(600);
 			hs.setAttribute(Email, currU);
 			//request.getRequestDispatcher("Welcome.jsp?Email="+Email).forward(request, response);
-			response.sendRedirect("Welcome.jsp?Email="+Email);
+			response.sendRedirect("userHome.jsp?Email="+Email);
 		}
 		else{
 			String error1="UserID or Password wrong, Please input again!";
