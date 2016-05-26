@@ -40,7 +40,7 @@ document.write(temp);
         <h3 class="text-muted">Stevens Duck Life</h3>
       </div>
 
-      <div class="jumbotron" style="background-image:url(/static/Uploads/Stevens.jpg)">
+      <div class="jumbotron" style="background-image:url(/MyWeb/static/Uploads/Stevens.jpg)">
         <h1 style="color: white">Join us now</h1>
         <form class="form-signin" action=RegisterCL id=0 name=registerform method=post>
         <label for="inputName" class="sr-only">Name</label>
