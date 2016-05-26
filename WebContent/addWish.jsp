@@ -62,7 +62,7 @@
                <li role="presentation"><a href="/MyWeb/dashboard.jsp">Dashboard</a></li>
                <li role="presentation"><a href="/MyWeb/userHome.jsp">My List</a></li>
 	           <li role="presentation" class="active"><a href="#">Add Post</a></li>
-               <li role="presentation" ><a href="/logout">Logout</a></li>
+               <li role="presentation" ><a href="/MyWeb/signin.jsp">Logout</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">Duck Life</h3>

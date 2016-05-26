@@ -32,7 +32,7 @@
         </div>
         </div>
  
-        <div style="background-image:url(/static/Uploads/Stevens.jpg)" class="well">
+        <div style="background-image:url(/MyWeb/static/Uploads/Stevens.jpg)" class="well">
             <div class="row">
                 <div align="center" class="col-sm-4 col-md-6">
                     <div>

@@ -36,7 +36,7 @@ function LowerCase(x){
         <h3 class="text-muted">Stevens Duck Life</h3>
       </div>
 
-      <div class="jumbotron" style="background-image:url(/static/Uploads/Stevens.jpg)">
+      <div class="jumbotron" style="background-image:url(/MyWeb/static/Uploads/Stevens.jpg)">
         <h1 style="color: white">Welcome back</h1>
         <form class="login" name="login" method="post">
         <label for="inputEmail" class="sr-only">Email address</label>

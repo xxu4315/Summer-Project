@@ -298,7 +298,7 @@
      
     
 	
-	<div class="well" style="background-image:url(/static/Uploads/Stevens.jpg)">
+	<div class="well" style="background-image:url(/MyWeb/static/Uploads/Stevens.jpg)">
     <div class="row">
         <div class="col-md-12">
             

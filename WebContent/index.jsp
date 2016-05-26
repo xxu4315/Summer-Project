@@ -58,7 +58,7 @@
         <h3 style="color:#A52A2A" class="text-muted">Stevens Duck Life</h3>
       </div>
 
-      <div class="jumbotron" style="background-image:url(/static/Uploads/Stevens.jpg)">
+      <div class="jumbotron" style="background-image:url(/MyWeb/static/Uploads/Stevens.jpg)">
           <h1 style="color: white">Start your fun here</h1>
           
         <p class="lead"></p>
