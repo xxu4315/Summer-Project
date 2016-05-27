@@ -1,215 +1,180 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Add Post</title>
-
-   
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
-    
-    <script src="../static/js/jquery-1.11.2.js"></script>
-
-	<script src="../static/js/jquery.ui.widget.js"></script>
-	
-	<script type="text/javascript" src="../static/js/jquery.fileupload.js"></script>
-	<script type="text/javascript" src="../static/js/jquery.fileupload-process.js"></script>
-	<script type="text/javascript" src="../static/js/jquery.fileupload-ui.js"></script>
-    <style>
-	.btn-file {
-    position: relative;
-    overflow: hidden;
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>jQuery漂亮的淘宝网商品展示效果丨芯晴网页特效丨CsrCode.Cn</title>
+<meta http-equiv="content-type" content="text/html;charset=gb2312">
+<!--把下面代码加到<head>与</head>之间-->
+<style type="text/css">
+BODY {
+ PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 12px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; TEXT-ALIGN: left
 }
-.btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
+UL {
+ PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 12px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
 }
-    label {
-            color:black
-        }
-    span.Star {
-            font-size:200%;
-            color:red;
-        }
-    </style>
-    
-   
-  </head>
-
+LI {
+ PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 12px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+IMG {
+ BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.sidebar2 .tabtitle {
+ BACKGROUND-IMAGE: url(/html/txdm_2/images/20100920/T10oNhXlHZedPC95UP-230-300.png); BACKGROUND-REPEAT: no-repeat
+}
+.sidebar2 .tabtitle LI {
+ BACKGROUND-IMAGE: url(/html/txdm_2/images/20100920/T10oNhXlHZedPC95UP-230-300.png); BACKGROUND-REPEAT: no-repeat
+}
+.tabcontent LI.cur {
+ BACKGROUND-IMAGE: url(/html/txdm_2/images/20100920/T10oNhXlHZedPC95UP-230-300.png); BACKGROUND-REPEAT: no-repeat
+}
+.tabcontent LI I {
+ BACKGROUND-IMAGE: url(/html/txdm_2/images/20100920/T15oNhXfY0edP3Uhgj-60-100.gif); BACKGROUND-REPEAT: no-repeat
+}
+.sidebar2 .tabtitle {
+ BACKGROUND-POSITION: 0px -37px; PADDING-LEFT: 10px; WIDTH: 220px; COLOR: #640000; LINE-HEIGHT: 30px; HEIGHT: 30px
+}
+.sidebar2 {
+ CLEAR: both; MARGIN-TOP: 5px
+}
+.sidebar2_div {
+ BORDER-RIGHT: #ebebeb 1px solid; BORDER-TOP: #ebebeb 1px; BORDER-LEFT: #ebebeb 1px solid; BORDER-BOTTOM: #ebebeb 1px solid
+}
+.sidebar2_div A {
+ COLOR: #0048ff
+}
+.sidebar2 {
+ MARGIN-TOP: 15px
+}
+.sidebar2_div {
+ WIDTH: 228px
+}
+.sidebar2 .tabtitle LI {
+ BACKGROUND-POSITION: -81px -77px; MARGIN-TOP: 6px; FLOAT: left; LINE-HEIGHT: 23px; MARGIN-RIGHT: 4px
+}
+.sidebar2 .tabtitle LI A {
+ DISPLAY: block; FONT-WEIGHT: bolder; FONT-SIZE: 14px; WIDTH: 68px; COLOR: #640000; HEIGHT: 23px; TEXT-ALIGN: center; TEXT-DECORATION: none
+}
+.sidebar2 .tabtitle LI.cur {
+ BACKGROUND-POSITION: 0px -77px; HEIGHT: 24px
+}
+.tabcontent {
+ DISPLAY: none; PADDING-TOP: 5px
+}
+.cur_tabcontent {
+ DISPLAY: block
+}
+.tabcontent LI {
+ CLEAR: both; LINE-HEIGHT: 33px
+}
+.tabcontent LI.even {
+ BORDER-TOP: #e9e9e9 1px solid; BORDER-BOTTOM: #e9e9e9 1px solid; BACKGROUND-COLOR: #f0f0f0
+}
+.tabcontent LI.odd {
+ 
+}
+.tabcontent LI I {
+ MARGIN-TOP: 8px; FLOAT: left; MARGIN-LEFT: 7px; WIDTH: 19px; LINE-HEIGHT: 19px; MARGIN-RIGHT: 8px; FONT-STYLE: normal; HEIGHT: 19px; TEXT-ALIGN: center
+}
+.tabcontent LI I.i_yeicon {
+ BACKGROUND-POSITION: 0px 0px
+}
+.tabcontent LI I.i_graycon {
+ BACKGROUND-POSITION: -24px 0px
+}
+.tabcontent LI A {
+ FONT-SIZE: 14px; TEXT-DECORATION: none
+}
+.tabcontent LI A:hover {
+ TEXT-DECORATION: underline
+}
+.tabcontent LI.cur {
+ BORDER-TOP-WIDTH: 0px; BACKGROUND-POSITION: 0px -112px; BORDER-LEFT-WIDTH: 0px; LEFT: -1px; BORDER-BOTTOM-WIDTH: 0px; WIDTH: 230px; LINE-HEIGHT: 15px; PADDING-TOP: 6px; POSITION: relative; HEIGHT: 64px; BORDER-RIGHT-WIDTH: 0px
+}
+.tabcontent LI.cur IMG {
+ FLOAT: left
+}
+.tabcontent LI.cur I {
+ MARGIN-TOP: 20px; MARGIN-RIGHT: 0px
+}
+.tabcontent LI.cur A {
+ FONT-WEIGHT: bolder; FONT-SIZE: 12px
+}
+.tabcontent LI.cur SPAN {
+ FONT-WEIGHT: bolder; COLOR: #c70202
+}
+</style>
+<script type="text/javascript">
+(function(){
+  var str=window.location.href;
+    var pid= str.match(/pid=mm_\d{0,10}_\d{0,10}_\d{0,10}/i);
+    //alert(pid);
+    if(pid){
+      pid = pid[0].split("=")[1]
+      var reg=new RegExp("pid=mm_13110335_0_0","gmi");
+      var as   =   document.getElementsByTagName("A");
+      for(var   i   =   0;   i <   as.length;   i   ++){
+        as[i].href=as[i].href.replace(reg,"pid="+pid);
+      } 
+      document.body.innerHTML =document.body.innerHTML.replace(reg,"pid="+pid)
+   }
+})();
+</script>
+<script type="text/javascript" src="/html/txdm_2/images/20100920/jquery-1.3.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $(".tabcontent li:odd").addClass("even");
+    $(".tabcontent li").each(function(){
+        $this = $(this);
+        $this.mouseover(function(){
+          if($(this).hasClass("cur")){return true;}
+         $(this).siblings("li").removeClass("cur");
+         $(this).siblings("li").find("img").css("display", "none");
+         $(this).siblings("li").find("span").css("display", "none");
+         $(this).addClass("cur");
+         $(this).find("img").css("display", "block");
+         $(this).find("span").css("display", "block");
+          return false;
+        });
+    });
+    $(".tabcontent li img,.tabcontent li span").css("display", "none");
+    $(".tabcontent li.cur img,.tabcontent li.cur span").css("display", "block");
+    $(".tabtitle li").each(function(){
+        $this = $(this);
+        $this.mouseover(function(){
+            $(this).siblings("li").removeClass("cur");
+            $(this).addClass("cur");
+            var $cur_id_num = $(this).attr("id").slice(-1);
+            $(".tabcontent").removeClass("cur_tabcontent");
+            $("#tabcontent" + $cur_id_num).addClass("cur_tabcontent");
+        });
+    });
+});
+</script>
+</head>
 <body>
-
-    <div class="container">
-    
-      <div class="header">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-              <li role="presentation"><a style="color:#A52A2A" target="_blank" href="https://shibboleth.stevens.edu/idp/Authn/UserPassword">MyStevens</a></li>
-	           <li role="presentation"><a href="/MyWeb/userHome.jsp">Home</a></li>
-               <li role="presentation"><a href="/MyWeb/dashboard.jsp">Dashboard</a></li>
-               <li role="presentation"><a href="/MyWeb/userHome.jsp">My List</a></li>
-	           <li role="presentation" class="active"><a href="#">Add Post</a></li>
-               <li role="presentation" ><a href="/MyWeb/signin.jsp">Logout</a></li>
-          </ul>
-        </nav>
-        <h3 class="text-muted">Duck Life</h3>
-      </div>
-     
-<form role="form" method="post" action="/MyWeb/addWish.jsp">
-<div class="well">
-    
-
-
-
-<!-- Form Name -->
-<legend>Create Your Post</legend>
-
-<form class="form-horizontal" role="form" action="PostHouseCL">
-<input type=hidden id=email name=email value="<%=request.getParameter("email") %>"> 
-<!-- Text input-->
-<div class="form-group">
-  <label  class="control-label col-md-2" for="txtTitle">Title</label>
-  <div class="col-md-9">
-      <input type="text" id="title" name="title" maxlength="50" required="required" placeholder="Title" class="form-control input-md">
-    </div><span class="Star">*</span>
-  </div>
-<br>
-<div class="form-group">
-    <label class="control-label col-md-2" for="Address">Address</label>
-    <div class="col-md-9">
-        <input placeholder="Address" id="h_location" type="text" name="h_location" maxlength="20" required="required" class="form-control input-md">
-        <select name="h_area" style="font-size:200%">
-         <option selected="true" disabled="disabled">Select Area</option>
-  		 <option value="Jersey City">Jersey City</option>
-  		 <option value="Union City">Union City</option>
-  		 <option value="Hoboken">Hoboken</option>
-  		 <option value="Weehawken">Weehawken</option>
-  		 <option value="New Port">New Port</option>
-         <option value="Jersey City">Other</option>
-		 </select>
-        </div><span class="Star">*</span>
-    </div> 
-<br>
-<!-- Textarea -->
-<div class="form-group">
-  <label class="control-label col-md-2" for="txtPost">House type</label>
-    <div class="col-md-9">
-    <input required="required" class="form-control" id="txtPost" name="housetype" placeholder="Describe your house">
-    <select required="required" style="font-size:200%" name="housetype">
-    <option selected="true" disabled="disabled">Select Bed/Bath</option>
-  <optgroup label="1Bed">
-    <option value="1B/1B">1B/1B</option>
-  </optgroup>
-  <optgroup label="2Bed">
-    <option value="2B/1B">2B/1B</option>
-    <option value="2B/1.5B">2B/1.5B</option>
-    <option value="2B/2B">2B/2B</option>
-  </optgroup>
-  <optgroup label="3Bed">
-    <option value="3B/1B">3B/1B</option>
-    <option value="3B/1.5B">3B/1.5B</option>
-    <option value="3B/2B">3B/2B</option>
-    <option value="3B/2.5B">3B/2.5B</option>
-    <option value="3B/3B">3B/3B</option>
-  </optgroup>
-  <optgroup label="4Bed">
-    <option value="4B/2B">4B/2B</option>
-    <option value="4B/2.5B">4B/2.5B</option>
-    <option value="4B/3B">4B/3B</option>
-  </optgroup>
-        </select>
-    </div><span class="Star">*</span>
-</div>
-<br>
-<div class="form-group">
-  <label class="control-label col-sm-2" for="RoomType">Room type</label>
-    <div class="col-sm-9">
-    <select style="font-size:200%" name="roomtype">
-         <option selected="true" disabled="disabled">Room type</option>
-  		 <option value="bedroom">bedroom</option>
-  		 <option value="livingroom">livingroom</option>
-         
-    </select>
-    </div><span class="Star">*</span>
-    </div>
-    <br>
-<div class="form-group">
-    <label class="control-label col-sm-2" for="Gender">Gender</label>
-    <div class="col-sm-9">
-        <select style="font-size:200%" name="sex">
-         <option selected="true" disabled="disabled">Select gender</option>
-  		 <option value="Male">Male</option>
-  		 <option value="Female">Female</option>
-  		 <option value="Unlimited">Unlimited</option>
-		 </select>
-        </div>
-        
-    </div>
-    <br>
-Your contact information:<br/>
-WechatID:<input type="text" id="wechatid" maxlength="20" name="wechatid" required="required" /><br/>
-QQ:<input type=text id=QQ maxlength=12 name=qq pattern="[1-9][0-9]{5,}" placeholder="xxx-xxx.xxxx" title="invalid QQ number, please input again" ><br/>
-PhoneNumber:<input type=text id=phonenumber maxlength=12 name=phonenumber pattern=".{3}[-].{3}[.].{4}" placeholder="xxx-xxx.xxxx" title="Please input your phone number using correct format as xxx-xxx.xxxx" > eg:xxx-xxx.xxxx<br/>
-Price:<input type="number" id="price" min="0" max="999999" name="price"  />$/month <span style=color:red>*</span><br/>
-    <br>
-<div class="form-group">
-  <label class="control-label col-sm-2" for="Description">Description</label>
-    <div class="col-md-9">
-  <textarea class="form-control" rows="5" id="houseinfo" name="houseinfo" placeholder="Describe your house here..."></textarea>
-    </div>
-</div>
-    <legend></legend>
-<!--<div class="form-group">
-  <label class="control-label col-sm-2" for="txtPost">Photos</label>
-                     div class="input-group">
-                <span class="input-group-btn">
-                    <span class="btn btn-primary btn-file">
-                        Browse&hellip; <input type="file" id="fileupload" name="file" multiple>
-                    </span>
-                </span>
-		<div class="pull-right">
-            <img  id="imgUpload" style="width: 140px; height: 140px;" class="img-thumbnail"><input type="hidden" name="filePath" id="filePath"></div>
-		</div>
-    </div>-->
-
-
-
-<!--<div class="form-group">
-<label>Mark this as private and not visible to others.</label><br/>
-<input name="private" type="checkbox"> Mark as Private <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
-</div>
-
-<div class="form-group">
-<label>Have you already accomplished this?</label><br/>
-<input name="done" type="checkbox"> Mark as Done <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-</div>-->
-<!-- Button -->
-    </form>
-    </div>
-<div class="form-group">
-  
-    <p class="text-center">
-    <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="Publish" onclick="window.location.href='/MyWeb/PostHouseCL'"/>
-  	</p>
-</div>
-        </form>
-      <footer class="footer">
-        <p>&copy; Yaoshuai 2016</p>
-      </footer>
-    </div>
-  </body>
+<br>预览效果时左下角会提示错误，而且看不到效果，刷新一下就可以看到效果了；当然，在实际使用中，不会出现这样的问题。<br><br>
+<!--把下面代码加到<body>与</body>之间-->
+<DIV class="sidebar2" style="MARGIN-TOP: 0px; WIDTH: 230px; HEIGHT: 420px">
+ <UL class="tabtitle">
+  <LI class="cur" id="tabtitle1"><A href="http://search8.taobao.com/browse/search_easy.htm?keyword=凉鞋&catid=50006843&refpid=mm_13110335_0_0&isinner=0&t=0e9b9a8d1" target="_blank">淘气榜</A></LI>
+ </UL>
+ <DIV class="sidebar2_div">
+  <UL class="tabcontent cur_tabcontent" id="tabcontent1">
+   <LI><I class="i_yeicon">1</I> <A href="http://search8.taobao.com/browse/search_easy.htm?keyword=通勤+女包&catid=50006842&refpid=mm_13110335_0_0&isinner=0&t=43b895ca1" target="_blank"><IMG height="62" alt="" src="/html/txdm_2/images/20100920/product.jpg" width="72"><A href="http://search8.taobao.com/browse/search_easy.htm?keyword=通勤+女包&catid=50006842&refpid=mm_13110335_0_0&isinner=0&t=43b895ca1" target="_blank">知性OL－简约大方通勤必备</A> <SPAN>淘宝价：46元</SPAN> 
+   <LI><I class="i_yeicon">2</I> <A href="http://search8.taobao.com/browse/search_easy.htm?keyword=帆布+女包&catid=50006842&refpid=mm_13110335_0_0&isinner=0&t=e977824c1" target="_blank"><IMG height="62" alt="" src="/html/txdm_2/images/20100920/product.jpg" width="72"><A href="http://search8.taobao.com/browse/search_easy.htm?keyword=帆布+女包&catid=50006842&refpid=mm_13110335_0_0&isinner=0&t=e977824c1" target="_blank">英伦风－百搭帆布帅气单肩包</A> <SPAN>淘宝价：88元</SPAN> 
+   <LI><I class="i_yeicon">3</I> <A href="http://search8.taobao.com/browse/search_easy.htm?keyword=女包+手拿&catid=50006842&refpid=mm_13110335_0_0&isinner=0&t=b06719191" target="_blank"><IMG height="62" alt="" src="/html/txdm_2/images/20100920/product.jpg" width="72"><A href="http://search8.taobao.com/browse/search_easy.htm?keyword=女包+手拿&catid=50006842&refpid=mm_13110335_0_0&isinner=0&t=b06719191" target="_blank">淑女系－可爱小女生最爱</A> <SPAN>淘宝价：29元</SPAN> </LI>
+   <LI class="cur"><I class="i_yeicon">4</I> <A href="http://search8.taobao.com/browse/search_easy.htm?keyword=双肩包+女&catid=50006842&refpid=mm_13110335_0_0&isinner=0&t=f003c4aa1" target="_blank"><IMG height="62" alt="" src="/html/txdm_2/images/20100920/product.jpg" width="72"><A href="http://search8.taobao.com/browse/search_easy.htm?keyword=双肩包+女&catid=50006842&refpid=mm_13110335_0_0&isinner=0&t=f003c4aa1" target="_blank">学院风－日系流行时尚双肩包</A> <SPAN>淘宝价：55元</SPAN> 
+   <LI><I class="i_graycon">5</I><A href="http://search8.taobao.com/browse/search_easy.htm?keyword=斜挎+女包&catid=50006842&refpid=mm_13110335_0_0&isinner=0&t=6363e72f1" target="_blank"><IMG height="62" alt="" src="/html/txdm_2/images/20100920/product.jpg" width="72"><A href="http://search8.taobao.com/browse/search_easy.htm?keyword=斜挎+女包&catid=50006842&refpid=mm_13110335_0_0&isinner=0&t=6363e72f1" target="_blank">时尚派－柱形手提斜挎女包</A> <SPAN>淘宝价：125元</SPAN> 
+   <LI><I class="i_graycon">6</I> <A href="http://search8.taobao.com/browse/search_easy.htm?keyword=蝴蝶&catid=50006843&refpid=mm_13110335_0_0&isinner=0&t=78fddf1f1" target="_blank"><IMG height="62" alt="" src="/html/txdm_2/images/20100920/product.jpg" width="72"><A href="http://search8.taobao.com/browse/search_easy.htm?keyword=蝴蝶&catid=50006843&refpid=mm_13110335_0_0&isinner=0&t=78fddf1f1" target="_blank">蝴蝶结－闪金淡蓝可爱单鞋</A> <SPAN>淘宝价：89元</SPAN> 
+   <LI><I class="i_graycon">7</I> <A href="http://search8.taobao.com/browse/search_easy.htm?keyword=高跟+凉鞋&catid=50006843&refpid=mm_13110335_0_0&isinner=0&t=40e34fb31" target="_blank"><IMG height="62" alt="" src="/html/txdm_2/images/20100920/product.jpg" width="72"><A href="http://search8.taobao.com/browse/search_easy.htm?keyword=高跟+凉鞋&catid=50006843&refpid=mm_13110335_0_0&isinner=0&t=40e34fb31" target="_blank">高跟鞋－复古小名媛圆头鞋</A> <SPAN>淘宝价：53元</SPAN></LI>
+  </UL>
+ </DIV>
+</DIV>
+</body>
 </html>
+
+<p align="center">本特效由 <a href="http://www.CsrCode.cn">芯晴网页特效</a>丨CsrCode.Cn 收集于互联网，只为兴趣与学习交流，不作商业用途。</p>
+
 

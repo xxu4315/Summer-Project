@@ -85,7 +85,7 @@ public class HouseBean {
 	public void sethouseinfo(String info){
 		this.houseinfo = info;
 	}
-	public String get(){
+	public String gethouseinfo(){
 		return this.houseinfo;
 	}
 	public void settitle(String title){

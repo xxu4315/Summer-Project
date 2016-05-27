@@ -1,11 +1,14 @@
 package web;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HouseBeanCL {
 	private Connection ct=null;
 	private PreparedStatement ps=null;
 	private ResultSet rs=null;
+	private DatabaseMetaData dmd = null; 
 	
 	//close
 	public void close(){
@@ -60,4 +63,45 @@ public class HouseBeanCL {
 		}
 		return flag;
 	}
+	
+	//get from database
+		public List<HouseBean> findAllHouse(){
+			System.out.print("findHouse");
+			boolean flag = false;
+			int x;
+			HouseBean obj = null;
+			List<HouseBean> houseList = new ArrayList<HouseBean>();
+			try{
+				ConnDB cd = new ConnDB();
+				ct = cd.getConn();
+				ps = ct.prepareStatement("select * from houseinfo");
+				System.out.println(ps);
+				rs = ps.executeQuery();
+				while(rs.next()){
+					//show houses
+					obj = new HouseBean();
+					obj.setid(rs.getString("id"));
+					obj.settitle(rs.getString("title"));
+					obj.sethouseinfo(rs.getString("houseinfo"));
+					obj.sethousetype(rs.getString("housetype"));
+					obj.setphonenumber(rs.getString("phonenumber"));
+					obj.setprice(rs.getString("price"));
+					obj.setqq(rs.getString("qq"));
+					obj.setroomtype(rs.getString("roomtype"));
+					obj.setsex(rs.getString("sex"));
+					obj.setwechatid(rs.getString("wechatid"));
+					obj.seth_location(rs.getString("h_location"));
+					obj.seth_area(rs.getString("h_area"));					
+					houseList.add(obj);
+				}
+			
+			}
+			catch(Exception ex){
+				ex.printStackTrace();
+			}
+			finally{
+				this.close();
+			}
+			return houseList;
+		}
 }
