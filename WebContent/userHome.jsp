@@ -3,6 +3,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<%
+String useremail = request.getParameter("Email");
+//System.out.println(useremail+"  Wel");
+if(session.getAttribute(useremail)==null){
+//user did not login
+response.sendRedirect("signin.jsp");
+}
+%>
   <head>
     <title>userHome</title>
 
@@ -323,14 +331,12 @@
         <p>&copy; Yaoshuai 2016</p>
       </footer>
 </div>
-    <center>
     <form action=Housing.jsp method=post>  
     <!-- transfer email address to StevensHousing page -->
-    <input type=hidden id="hidden 1" name="email" value="<%=request.getParameter("Email") %>">
+    <input type=hidden id="hidden 1" name=email value="<%=request.getParameter("Email") %>">
     <!-- jump into StevensHousing page -->
     <input type=submit value=StevensHousing>
     </form>
-    </center>
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">

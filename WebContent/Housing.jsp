@@ -2,7 +2,14 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
- 
+ <%
+String useremail = request.getParameter("email");
+//System.out.println(useremail+"  Wel");
+if(session.getAttribute(useremail)==null){
+//user did not login
+response.sendRedirect("signin.jsp");
+}
+%>
 <head>
     <title>Dashboard</title>
  
@@ -48,18 +55,16 @@
                         </div>
                     </div>
                 </div>
-                <div align="center" class="col-sm-4 col-md-6">
-                    <div >
-                        <a href="/MyWeb/addWish.jsp"><img alt="100%x200" class="img-circle" src="static/Uploads/bucketList.jpg" data-holder-rendered="true" style="height: 325px; width: 450px; display: block;"></a>
-                        <div class="caption">
-                            <h3></h3>
-                            <p style="font-size:200%">Post</p>
+                 <form action=addWish.jsp method=post >  
+                 <input type=hidden id="hidden 1" name=email value="<%=request.getParameter("email") %>">
+                 <input type=submit value=Post class="col-sm-4 col-md-6">
+                 </form>
+                            
                             <!--<p>
                                 <button type="button" class="btn btn-danger btn-sm">
                                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                                 </button>
                             </p>-->
-                        </div>
                     </div>
                 </div>
                 <!--<div class="col-sm-4 col-md-4">

@@ -34,7 +34,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response)
         String password = "zxcvbmn1";  
          
        String registerId = "" + Math.random() * Math.random();  
-        String url = "http://localhost:8080/MyWeb/MailBackServlet?registerId=" + registerId;//待会用户点在邮箱中点击这个链接回到你的网站。  
+        String url = "http://localhost:8080/MyWeb/MailBackServlet?registerId=" + registerId;  
          
         HttpSession httpSession = request.getSession();  
         httpSession.setAttribute(registerId, registerName);  
