@@ -40,7 +40,7 @@ function LowerCase(x){
         <h1 style="color: white">Welcome back</h1>
         <form class="login" name="login" method="post">
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" name=email id=1 maxlength=10 class="form-control" onkeyup="LowerCase(this.id)" placeholder="Email address" required autofocus>
+        <input type="email" name=email id=1 maxlength=50 class="form-control" onkeyup="LowerCase(this.id)" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
         
