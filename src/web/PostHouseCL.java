@@ -60,10 +60,8 @@ public class PostHouseCL extends HttpServlet {
 			
 			if(email != null && h_location != null && h_area != null){
 				boolean check = hbc.posthouse(email, title, h_location, h_area, housetype, roomtype, sex, wechatid, qq, phonenumber, price, houseinfo);
-				System.out.print("here");
 				if(check == false){
 					//houseinfo already exist
-					System.out.print("post fail");
 					String error1 ="House information already exist!" ;
 					out.println(error1);
 					out.println("<br/>");
@@ -72,11 +70,10 @@ public class PostHouseCL extends HttpServlet {
 				}
 				else{
 					//post successed
-					System.out.print("post succeed");
 					String success1 = "House information post successful!";
 					out.println(success1);
 					out.println("<br/>");
-					response.sendRedirect("StevensHousing.jsp?email="+email+"&success="+success1);
+					//response.sendRedirect("userHome.jsp?email="+email+"&success="+success1);
 				}
 			}
 		}

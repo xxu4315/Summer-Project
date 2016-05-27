@@ -39,22 +39,10 @@ response.sendRedirect("signin.jsp");
         </div>
         </div>
  
-        <div style="background-image:url(/MyWeb/static/Uploads/Stevens.jpg)" class="well">
-            <div class="row">
-                <div align="center" class="col-sm-4 col-md-6">
-                    <div>
-                        <a href="/MyWeb/Housing.jsp"><img class="img-circle" alt="100%x200" src="static/Uploads/bucketList.jpg" data-holder-rendered="true" style="height: 325px; width: 450px; display: block;"></a>
-                        <div class="caption">
-                            <h3></h3>
-                            <p style="font-size:200%">Find</p>
-                            <!--<p>
-                                <button type="button" class="btn btn-danger btn-sm">
-                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                </button>
-                            </p>-->
-                        </div>
-                    </div>
-                </div>
+                 <form action=FindAllHouseCL method=post >  
+                 <input type=hidden id="hidden 1" name=email value="<%=request.getParameter("email") %>">
+                 <input type=submit value=Find class="col-sm-4 col-md-6">
+                 </form>
                  <form action=addWish.jsp method=post >  
                  <input type=hidden id="hidden 1" name=email value="<%=request.getParameter("email") %>">
                  <input type=submit value=Post class="col-sm-4 col-md-6">
