@@ -34,7 +34,7 @@ public class RegisterCL extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			UserBeanCL ubc = new UserBeanCL();
 			String UserName = request.getParameter("username");
-			String Email = request.getParameter("userid");
+			String Email = request.getParameter("email");
 			//Email.toLowerCase();
 			String PassWord = request.getParameter("password");
 			if(!(UserName == null && Email == null && PassWord == null)){
@@ -44,7 +44,7 @@ public class RegisterCL extends HttpServlet {
 					//request.getRequestDispatcher("Register.jsp").forward(request, response);
 					out.println("Email-address already exist");
 					out.println("<br/>");
-					out.println("<a href=\"http://localhost:8080/MyWeb/signup.jsp\" target=_self >Go back to Register Page</a>");
+					out.println("<a href=\"http://localhost:9090/signup.jsp\" target=_self >Go back to Register Page</a>");
 				}
 				else{
 					String regex="[a-zA-Z0-9_\\-\\.]+@(stevens)+(\\.(edu))" ;
@@ -57,12 +57,12 @@ public class RegisterCL extends HttpServlet {
 						System.out.println("no");
 						out.println("Invalid email address, you should need to use your stevens email address to register!");
 						out.println("<br/>");
-						out.println("<a href=\"http://localhost:8080/MyWeb/signup.jsp\" target=_self >Go back to Register Page</a>");
+						out.println("<a href=\"http://localhost:9090/signup.jsp\" target=_self >Go back to Register Page</a>");
 					}
 				}
 			}
 			else{
-				response.sendRedirect("Register.jsp");
+				response.sendRedirect("signup.jsp");
 			}
 		
 		}

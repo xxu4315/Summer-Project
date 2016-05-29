@@ -29,10 +29,10 @@ response.sendRedirect("signin.jsp");
             <nav>
                 <ul class="nav nav-pills pull-right">
                     <li role="presentation"><a style="color:#A52A2A" target="_blank" href="https://shibboleth.stevens.edu/idp/Authn/UserPassword">MyStevens</a></li>
-                    <li role="presentation" class="active"><a href="/MyWeb/dashboard.jsp">Dashboard</a></li>
-                    <li role="presentation"><a href="/MyWeb/userHome.jsp">My List</a></li>
-                    <li role="presentation"><a href="/MyWeb/addWish.jsp">Add Post</a></li>
-                    <li role="presentation"><a href="/MyWeb/index.jsp">Logout</a></li>
+                    <li role="presentation" class="active"><a href="/dashboard.jsp">Dashboard</a></li>
+                    <li role="presentation"><a href="/userHome.jsp">My List</a></li>
+                    <li role="presentation"><a href="/addWish.jsp">Add Post</a></li>
+                    <li role="presentation"><a href="/index.jsp">Logout</a></li>
                 </ul>
             </nav>
             <h3 class="text-muted">Stevens Duck Life</h3>

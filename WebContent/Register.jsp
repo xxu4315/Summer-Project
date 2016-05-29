@@ -16,7 +16,7 @@ function dosubmit(){
 	var b = document.getElementById('2').value;
 	var c = document.getElementById('3').value;
 	var d = document.getElementById('4').value;
-	alert("dosumit()");
+	//alert("dosumit()");
 	if(a==""){
 		alert("Eamil address couldn't be null!");
 		return false;
