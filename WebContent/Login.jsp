@@ -19,7 +19,7 @@ please login
         Email:<input type=text id=1 name=email maxlength=10 required=required onkeyup="LowerCase(this.id)">@stevens.edu<br/>  
         Password:<input type=password name=password required=required><br/>  
         <input type=submit name="btnSubmit" id="btnSubmit" value="Login" onClick="document.login.action = '/MyWeb/LoginCL';" /> 
-        <input type=submit name="btnSubmit" id="btnSubmit" value="Activate your account" onClick="document.login.action = '/MyWeb/RegisterServlet';" /> 
+        <input type=submit name="btnSubmit" id="btnSubmit" value="Activate your account" onClick="document.login.action = '/RegisterServlet';" /> 
     </form>   
     <a href="http://localhost:8080/MyWeb/Register.jsp" target=_self >Register here</a>
 </body>

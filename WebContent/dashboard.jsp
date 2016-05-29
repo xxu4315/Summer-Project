@@ -23,9 +23,9 @@
                 <ul class="nav nav-pills pull-right">
                     <li role="presentation"><a style="color:#A52A2A" target="_blank" href="https://shibboleth.stevens.edu/idp/Authn/UserPassword">MyStevens</a></li>
                     <li role="presentation" class="active"><a href="#">Dashboard</a></li>
-                    <li role="presentation"><a href="/MyWeb/userHome.jsp">My List</a></li>
-                    <li role="presentation"><a href="/MyWeb/addWish.jsp">Add Post</a></li>
-                    <li role="presentation"><a href="/MyWeb/index.jsp">Logout</a></li>
+                    <li role="presentation"><a href="/userHome.jsp">My List</a></li>
+                    <li role="presentation"><a href="/addWish.jsp">Add Post</a></li>
+                    <li role="presentation"><a href="/index.jsp">Logout</a></li>
                 </ul>
             </nav>
             <h3 class="text-muted">Stevens Duck Life</h3>
@@ -36,7 +36,7 @@
             <div class="row">
                 <div align="center" class="col-sm-4 col-md-4">
                     <div>
-                        <a href="/MyWeb/Housing.jsp"><img class="img-circle" alt="100%x200" src="static/Uploads/bucketList.jpg" data-holder-rendered="true" style="height: 300px; width: 400px; display: block;"></a>
+                        <a href="/Housing.jsp"><img class="img-circle" alt="100%x200" src="static/Uploads/bucketList.jpg" data-holder-rendered="true" style="height: 300px; width: 400px; display: block;"></a>
                         <div class="caption">
                             <h3></h3>
                             <p style="font-size:200% ">Housing</p>

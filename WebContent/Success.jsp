@@ -24,7 +24,7 @@
           <ul class="nav nav-pills pull-right">
             <li role="presentation"><a style="color:#A52A2A" target="_blank" href="https://shibboleth.stevens.edu/idp/Authn/UserPassword">MyStevens</a></li>
             <li role="presentation" ><a href="/">Home</a></li>
-            <li role="presentation"><a href="/MyWeb/signin.jsp">Sign In</a></li>
+            <li role="presentation"><a href="/signin.jsp">Sign In</a></li>
             <li role="presentation" class="active"><a href="#">Sign Up</a></li>
           </ul>
         </nav>
@@ -32,7 +32,7 @@
       </div>
         <div class="alert alert-success">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Success!</strong> You have successfuly signed up for Duck Life!<span> </span><span><a href="/MyWeb/signin.jsp">Login here</a></span>
+            <strong>Success!</strong> You have successfuly signed up for Duck Life!<span> </span><span><a href="/signin.jsp">Login here</a></span>
   </div>
       <form action=RegisterServlet method="post">  
       <font size="5" color="red">Please summit to activate your account before login :</font><br/> 

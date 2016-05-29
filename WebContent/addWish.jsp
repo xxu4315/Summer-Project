@@ -113,11 +113,11 @@ if(request.getParameter("error")!=null){
         <nav>
           <ul class="nav nav-pills pull-right">
               <li role="presentation"><a style="color:#A52A2A" target="_blank" href="https://shibboleth.stevens.edu/idp/Authn/UserPassword">MyStevens</a></li>
-	           <li role="presentation"><a href="/MyWeb/userHome.jsp">Home</a></li>
-               <li role="presentation"><a href="/MyWeb/dashboard.jsp">Dashboard</a></li>
-               <li role="presentation"><a href="/MyWeb/userHome.jsp">My List</a></li>
+	           <li role="presentation"><a href="/userHome.jsp">Home</a></li>
+               <li role="presentation"><a href="/dashboard.jsp">Dashboard</a></li>
+               <li role="presentation"><a href="/userHome.jsp">My List</a></li>
 	           <li role="presentation" class="active"><a href="#">Add Post</a></li>
-               <li role="presentation" ><a href="/MyWeb/signin.jsp">Logout</a></li>
+               <li role="presentation" ><a href="/signin.jsp">Logout</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">Duck Life</h3>
@@ -311,7 +311,7 @@ Price:<input type="number" id="price" min="0" max="999999" name="price"  />$/mon
               
                 else{
               
-                  window.location.href="/MyWeb/Housing.jsp";
+                  window.location.href="/Housing.jsp";
                 }
               }
               catch(err){

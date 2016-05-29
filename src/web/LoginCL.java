@@ -55,7 +55,7 @@ public class LoginCL extends HttpServlet {
 		}
 		else{
 			String error1="UserID or Password wrong, Please input again!";
-				response.sendRedirect("Login.jsp?error="+error1);
+				response.sendRedirect("signin.jsp?error="+error1);
 		}
 	        
 	
