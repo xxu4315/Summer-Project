@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class RegisterCL
@@ -30,11 +31,12 @@ public class RegisterCL extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try{
-			response.setContentType("text/html;charset=gb2312");
+			response.setContentType("text/html;charset=utf-8"); 
 			PrintWriter out = response.getWriter();
 			UserBeanCL ubc = new UserBeanCL();
 			String UserName = request.getParameter("username");
 			String Email = request.getParameter("email");
+			;
 			//Email.toLowerCase();
 			String PassWord = request.getParameter("password");
 			if(!(UserName == null && Email == null && PassWord == null)){
@@ -43,21 +45,27 @@ public class RegisterCL extends HttpServlet {
 					//request.setAttribute("error","Email-address already exist");
 					//request.getRequestDispatcher("Register.jsp").forward(request, response);
 					out.println("Email-address already exist");
-					out.println("<br/>");
-					out.println("<a href=\"http://localhost:9090/signup.jsp\" target=_self >Go back to Register Page</a>");
 				}
 				else{
 					String regex="[a-zA-Z0-9_\\-\\.]+@(stevens)+(\\.(edu))" ;
 					if(Email.matches(regex)){
 						System.out.println("yes");
 						request.setAttribute("Email", Email);
-						request.getRequestDispatcher("/Success.jsp").forward(request,response); 
+						String status = "success";
+						request.setAttribute("status", status);
+						HttpSession session = request.getSession();
+						session.setAttribute("status", status);
+						out.println("");
+						//request.getRequestDispatcher("/signup.jsp").forward(request,response); 
 					}
-					else{
+					else{	
 						System.out.println("no");
+						String status = "fail";
+						request.setAttribute("status", status);
+						HttpSession session = request.getSession();
+						session.setAttribute("status", status);
 						out.println("Invalid email address, you should need to use your stevens email address to register!");
-						out.println("<br/>");
-						out.println("<a href=\"http://localhost:9090/signup.jsp\" target=_self >Go back to Register Page</a>");
+						//request.getRequestDispatcher("/signup.jsp").forward(request,response); 
 					}
 				}
 			}

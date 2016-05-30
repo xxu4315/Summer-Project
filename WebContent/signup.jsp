@@ -71,6 +71,85 @@
 			
 		
 </script>
+
+<script>
+var xmlHttp;  
+function createXMLHttpRequest()  
+{  
+ if(window.ActiveXObject)  
+ {  
+  xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");  
+ }  
+ else if(window.XMLHttpRequest)  
+ {  
+  xmlHttp=new XMLHttpRequest();  
+ }  
+}  
+  
+function createQueryString()  
+{  
+ var username=document.getElementById("username").value;  
+ var email=document.getElementById("email").value;  
+ var password=document.getElementById("password").value;  
+    
+ var queryString="username=" + username + "&email=" + email + "&password=" + password;  
+ return queryString;  
+}  
+  
+function doRequestUsingGET()  
+{  
+ createXMLHttpRequest();  
+ var queryString="./RegisterCL?";  
+ queryString=queryString+createQueryString() + "&timeStamp=" + new Date().getTime();  
+ xmlHttp.onreadystatechange=handleStateChange;  
+ xmlHttp.open("GET",queryString,true);  
+ xmlHttp.send(null);  
+}  
+  
+function doRequestUsingPost()  
+{ 
+ createXMLHttpRequest();  
+ var url="./RegisterCL?timeStamp=" + new Date().getTime();  
+ var queryString=createQueryString();  
+ xmlHttp.open("POST",url,true);  
+ xmlHttp.onreadystatechange=handleStateChange;  
+ xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");  
+ xmlHttp.send(queryString);  
+}  
+  
+  
+function handleStateChange()  
+{  
+ if(xmlHttp.readyState==4)  
+ {  
+  if(xmlHttp.status==200)  
+  {  
+   parseResults();  
+  }  
+ }  
+}  
+  
+function parseResults()  
+{  
+ var responseDiv=document.getElementById("serverResponse");
+ var status = xmlHttp.responseText.length;
+ var Email = document.getElementById("serverResponse")
+ if(responseDiv.hasChildNodes())  
+ {  
+  responseDiv.removeChild(responseDiv.childNodes[0]);  
+ }
+ if(status == 1){
+	 var Email = document.getElementById('email').value;
+	 window.location="/Success.jsp?Email="+Email;
+ }
+ else{
+ var responseText=document.createTextNode(xmlHttp.responseText);  
+  alert("ERROR： "+xmlHttp.responseText);  
+ responseDiv.appendChild(responseText);  
+  }  
+}
+</script>
+
 <style>
 	          .form-group{
 	margin-bottom: 15px;
@@ -155,7 +234,7 @@ document.write(temp);
     
       </form>-->  
       	<div class="main-login main-center" style="border-radius:9px">
-					<form class="form-horizontal" method="post" action="/RegisterCL" id="registerform" name="registerform">
+					<form class="form-horizontal" method="post" action="#" id="registerform" name="registerform">
 						
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">User name</label>
@@ -209,11 +288,12 @@ document.write(temp);
                         <br>
 
 						<div class="form-group ">
-							<button type="button" id="btnSignUp" class="btn btn-primary btn-lg btn-block login-button" onclick="dosubmit()">Register</button>
+							<button type="button" id="btnSignUp" class="btn btn-primary btn-lg btn-block login-button" value="POST" onclick="doRequestUsingPost();">Register</button>
 						</div>
 						<div class="login-register">
 				            <a href="/signin.jsp">Login</a>
 				         </div>
+				         <div id="serverResponse"></div> 
 					</form>
 				</div>    
       </div>

@@ -13,12 +13,12 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="/Users/Eric/Documents/Summerproject/webproject/WebContent/WEB-INF/lib/javax.mail.jar"/>
-	<classpathentry kind="lib" path="/Users/Eric/Documents/Summerproject/webproject/WebContent/WEB-INF/lib/jstl.jar"/>
-	<classpathentry kind="lib" path="/Users/Eric/Documents/Summerproject/webproject/WebContent/WEB-INF/lib/postgresql-9.4-1204.jdbc4.jar"/>
-	<classpathentry kind="lib" path="/Users/Eric/Documents/Summerproject/webproject/WebContent/WEB-INF/lib/postgresql-9.4-1204.jdbc41.jar"/>
-	<classpathentry kind="lib" path="/Users/Eric/Documents/Summerproject/webproject/WebContent/WEB-INF/lib/postgresql-9.4-1204.jdbc42.jar"/>
-	<classpathentry kind="lib" path="/Users/Eric/Documents/Summerproject/webproject/WebContent/WEB-INF/lib/postgresql-9.4-1205-jdbc42.jar"/>
-	<classpathentry kind="lib" path="/Users/Eric/Documents/Summerproject/webproject/WebContent/WEB-INF/lib/standard.jar"/>
+	<classpathentry kind="lib" path="/home/junye/workspace2/webproject/WebContent/WEB-INF/lib/standard.jar"/>
+	<classpathentry kind="lib" path="/home/junye/workspace2/webproject/WebContent/WEB-INF/lib/postgresql-9.4-1205-jdbc42.jar"/>
+	<classpathentry kind="lib" path="/home/junye/workspace2/webproject/WebContent/WEB-INF/lib/postgresql-9.4-1204.jdbc42.jar"/>
+	<classpathentry kind="lib" path="/home/junye/workspace2/webproject/WebContent/WEB-INF/lib/postgresql-9.4-1204.jdbc41.jar"/>
+	<classpathentry kind="lib" path="/home/junye/workspace2/webproject/WebContent/WEB-INF/lib/postgresql-9.4-1204.jdbc4.jar"/>
+	<classpathentry kind="lib" path="/home/junye/workspace2/webproject/WebContent/WEB-INF/lib/jstl.jar"/>
+	<classpathentry kind="lib" path="/home/junye/workspace2/webproject/WebContent/WEB-INF/lib/javax.mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
