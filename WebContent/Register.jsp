@@ -46,7 +46,7 @@ function dosubmit(){
 </script>
 <body>
 <script>
-var temp = request.getAttribut("error");
+var temp = request.getAttribute("error");
 document.write(temp);
 </script>
 <form action=RegisterCL id=0 name=registerform method=post>
