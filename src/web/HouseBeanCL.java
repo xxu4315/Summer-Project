@@ -65,7 +65,7 @@ public class HouseBeanCL {
 	}
 	
 	//get from database
-		public List<HouseBean> findAllHouse(){
+		public List<HouseBean> findAllHouse(String h_area){
 			System.out.print("findHouse");
 			boolean flag = false;
 			int x;
@@ -74,7 +74,10 @@ public class HouseBeanCL {
 			try{
 				ConnDB cd = new ConnDB();
 				ct = cd.getConn();
-				ps = ct.prepareStatement("select * from houseinfo");
+				if(h_area.equals("all"))
+					ps = ct.prepareStatement("select * from houseinfo" );
+				else
+				ps = ct.prepareStatement("select * from houseinfo where h_area='"+h_area+"'" );
 				System.out.println(ps);
 				rs = ps.executeQuery();
 				while(rs.next()){

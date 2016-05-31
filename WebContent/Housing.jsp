@@ -39,7 +39,7 @@ response.sendRedirect("signin.jsp");
         </div>
         </div>
  
-                 <form action=FindAllHouseCL method=post >  
+                 <form action=addFindWish.jsp method=post >  
                  <input type=hidden id="hidden 1" name=email value="<%=request.getParameter("email") %>">
                  <input type=submit value=Find class="col-sm-4 col-md-6">
                  </form>

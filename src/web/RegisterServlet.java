@@ -34,7 +34,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response)
         String password = "zxcvbmn1";  
          
        String registerId = "" + Math.random() * Math.random();  
-        String url = "http://localhost:8080/MyWeb/MailBackServlet?registerId=" + registerId;  
+        String url = "http://localhost:8080/MailBackServlet?registerId=" + registerId;  
          
         HttpSession httpSession = request.getSession();  
         httpSession.setAttribute(registerId, registerName);  
@@ -70,7 +70,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response)
             e.printStackTrace();  
         }  
          
-//        request.getRequestDispatcher("/second.jsp").forward(request, response);  
+        request.getRequestDispatcher("/response.jsp").forward(request, response);  
    }  
   
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
