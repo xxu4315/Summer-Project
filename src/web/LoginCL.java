@@ -30,6 +30,7 @@ public class LoginCL extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("loginCL");
 		try{
 		PrintWriter out = response.getWriter();
 		//out.println("Hello world!");

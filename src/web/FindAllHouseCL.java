@@ -32,9 +32,10 @@ public class FindAllHouseCL extends HttpServlet {
 		System.out.println("findallhousecl");
 		try{
 			PrintWriter out = response.getWriter();
-			String email = request.getParameter("email");;
+			String email = request.getParameter("email");
+			String h_area = request.getParameter("h_area");
 			HouseBeanCL hbc= new HouseBeanCL();
-			List<HouseBean> houseList = hbc.findAllHouse();
+			List<HouseBean> houseList = hbc.findAllHouse(h_area);
 	//		for(int i = 0; i < houseList.size(); i++){
 	//		String title = houseList.get(i).gettitle();
 	//		System.out.println(title);

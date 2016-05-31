@@ -48,8 +48,10 @@ function LowerCase(x){
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
         
         <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit" onClick="document.login.action = '/LoginCL';">Sign in</button>
-        <br>
-        <button type=submit name="btnSubmit" id="btnSubmit" class="btn btn-info" style="font-size:80%" onClick="document.login.action = '/RegisterServlet';"><span style="font-size:100%">Activate your account</span></button>     
+        <!--<button type=submit name="btnSubmit" id="btnSubmit" class="btn btn-info" style="font-size:80%" onClick="document.login.action = '/RegisterServlet';"><span style="font-size:100%">Activate your account</span></button>-->
+        <div class="login-register">
+			<a href="/activate.jsp">Activate your account here</a>
+		</div>     
     </form>  
       </div>
 
