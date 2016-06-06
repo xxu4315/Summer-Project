@@ -65,7 +65,7 @@ public class HouseBeanCL {
 	}
 	
 	//get from database
-		public List<HouseBean> findAllHouse(String h_area){
+		public List<HouseBean> findAllHouse(String h_area, String housetype, String roomtype, String sex){
 			System.out.print("findHouse");
 			boolean flag = false;
 			int x;
@@ -74,10 +74,7 @@ public class HouseBeanCL {
 			try{
 				ConnDB cd = new ConnDB();
 				ct = cd.getConn();
-				if(h_area.equals("all"))
-					ps = ct.prepareStatement("select * from houseinfo" );
-				else
-				ps = ct.prepareStatement("select * from houseinfo where h_area='"+h_area+"'" );
+				ps = ct.prepareStatement("select * from houseinfo where (h_area="+h_area+") and (housetype="+housetype+") and (sex="+sex+") and (roomtype="+roomtype+")");
 				System.out.println(ps);
 				rs = ps.executeQuery();
 				while(rs.next()){

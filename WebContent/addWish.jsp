@@ -201,8 +201,8 @@ if(request.getParameter("error")!=null){
 		</select>
 	</fieldset>
 	<fieldset class="form-group">
-		<label for="gender">Gender</label>
-		<select class="form-control" id="gender" name="gender" style="width:300px" required>
+		<label for="sex">Gender</label>
+		<select class="form-control" id="sex" name="sex" style="width:300px" required>
 		<option selected="true" disabled="disabled">Your Gender</option>
 		<option value="male">Male</option>
 		<option value="female">Female</option>
@@ -289,7 +289,7 @@ if(request.getParameter("error")!=null){
                 var e6 = document.getElementById('room_type');
                 var x6 = e6.options[e6.selectedIndex].value;
                 var s6 = e6.selectedIndex;
-                var e8 = document.getElementById('gender');                
+                var e8 = document.getElementById('sex');                
                 var x8 = e8.options[e8.selectedIndex].value;
                 var s8 = e8.selectedIndex;
                 var x9 = document.getElementById('price').value;                
