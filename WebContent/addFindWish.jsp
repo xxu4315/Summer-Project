@@ -17,6 +17,7 @@
     <script src="../static/js/jquery-1.11.2.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/js/jquery.dynatable.js"></script>
     <script>
     function doAjax() {
     $.ajax({
@@ -52,7 +53,7 @@
     });
     }
     </script> 
-      <div>
+     <%--  <div>
         &nbsp;<div>
             <br />
             <input id="first" type="button" value="  <<  " /><input id="previous" type="button"
@@ -87,7 +88,7 @@
             LOADING....
         </div>
         <input type="hidden" id="pagecount" />
-    </div>
+    </div> --%>
     
     
     
@@ -101,6 +102,18 @@
    });
     </script> -->
   <script>
+  function IsValidJSON(test) {
+	    try {
+	        var obj = JSON.parse(test);
+	        if (obj && typeof obj === "object" && obj !== null) {
+	            return true;
+	        }
+	    } catch (e) {
+
+	    }
+	    return false;
+	}  
+
 var xmlHttp;  
 function createXMLHttpRequest()  
 {  
@@ -137,7 +150,7 @@ function doRequestUsingGET()
   
 function doRequestUsingPost()  
 { 
-	
+ $('#demo').empty();
  createXMLHttpRequest();  
  var url="./FindAllHouseCL?timeStamp=" + new Date().getTime();  
  var queryString=createQueryString();  
@@ -154,13 +167,51 @@ function handleStateChange()
  {  
   if(xmlHttp.status==200)  
   {  
-   parseResults();  
+   parseResults(); 
+ // myFunction(xmlHttp.responseText);
   }  
  }  
 }  
   
 function parseResults()  
 {  
+	/* alert(IsValidJSON(xmlHttp.responseText));
+	alert(xmlHttp.responseText); */
+	var text1 = '{"housing":'+xmlHttp.responseText.toString()+"}";
+/* 	alert(IsValidJSON(text));
+	alert(text); */
+	var text = '{"employees":[' +
+	'{"firstName":"John","lastName":"Doe" },' +
+	'{"firstName":"Anna","lastName":"Smith" },' +
+	'{"firstName":"Peter","lastName":"Jones" }]}';
+	var response = JSON.parse(text1);
+	var x;
+	for (x in response.housing)
+	{
+	document.getElementById("demo").innerHTML +=
+	response.housing[x].title + "<br>" + response.housing[x].housetype +"<br>" + response.housing[x].roomtype
+	+"<br>" + response.housing[x].houseinfo+"<br>" + response.housing[x].sex+"<br>" + response.housing[x].phonenumber
+	+"<br>" + response.housing[x].price+"<br>" + response.housing[x].h_location+"<br>"+ response.housing[x].id
+	+"<br>" + response.housing[x].h_area +"<br>"+"--------------------------------"+"<br>";
+	}
+	//var $records = $(response),
+   // myRecords = JSON.parse($records.text());
+	/* $('#tableIdToFill').dynatable({
+		  dataset: {
+		    ajax: true,
+		    ajaxUrl: '/FindAllHouseCL',
+		    ajaxOnLoad: true,
+		    records: []
+		  }
+		}); */
+
+   // myRecords = JSON.parse($records.text());
+	//var response = JSON.stringby(xmlHttp.responseText);
+/* 	$('#tableIdToFill').dynatable({
+		  dataset: {
+		    records: myRecords1
+		  }
+		});
  var responseDiv=document.getElementById("serverResponse");
  var status = xmlHttp.responseText.length;
  var Email = document.getElementById("serverResponse")
@@ -171,19 +222,38 @@ function parseResults()
 
 
  var responseText=document.createTextNode(xmlHttp.responseText);  
-  /*   alert("NOTE： "+xmlHttp.responseText);  */ 
+    alert("NOTE： "+xmlHttp.responseText);  
  responseDiv.appendChild(responseText);  
- var data = msg.table;
- $.each(responseText, function(i, n){
+
+  
+  $.each(data, function(i, n){
 	   var row = $("#template").clone();
        row.find("#OrderID").text(n.id);
        row.find("#CustomerID").text(n.sex);
        row.find("#EmployeeID").text(n.housetype);
-       row.find("#OrderDate").text(ChangeDate(n.roomtype));
        row.attr("id","ready");
        row.appendTo("#datas");
- })
+ })  */
 }
+function myFunction(response) {
+	alert(typeof (response));
+    var arr = response;
+    var i;
+    var out = "<table>";
+
+    for(i = 0; i < arr.length; i++) {
+        out += "<tr><td>" +
+        arr[i].sex +
+        "</td><td>" +
+        arr[i].housetype +
+        "</td><td>" +
+        arr[i].roomtype +
+        "</td></tr>";
+    }
+    out += "</table>";
+    document.getElementById("id01").innerHTML = out;
+}
+
 </script>
     <style>
 	.btn-file {
@@ -471,9 +541,26 @@ ${bean.getroomtype()}
 </tr>
 </c:forEach>
 </table> -->
+<div id="demo"></div>
     <div id="MyDiv"></div>
     <div id="serverResponse"> </div>  
- 
+    <div id="id01"></div>
+    <!-- <table id="tableIdToFill" class="display" cellspacing="0" width="98%">
+    <thead>
+    <tr>
+        <th>DATE</th>
+        <th>TYPE</th>
+        <th>NAME</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>DATE</th>
+        <th>TYPE</th>
+        <th>NAME</th>
+    </tr>
+    </tfoot>
+</table> -->
 </form>
 
 

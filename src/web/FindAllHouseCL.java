@@ -68,18 +68,23 @@ public class FindAllHouseCL extends HttpServlet {
 			out.println(hb.getwechatid());
 			
 			}*/
-			JSONArray jsonArray = JSONArray.fromObject(houseList);
-			System.out.println(jsonArray);
-			String json1 = new Gson().toJson(houseList);
 			response.setContentType("application/json");
-			response.getWriter().write(json1);
+			JSONArray jsonArray = JSONArray.fromObject(houseList);
+			//JSONObject jsonObject = ()JSONObject.fromObject(jsonObject, HouseBean.class);
+		//	System.out.println(jsonArray);
+			String json1 = new Gson().toJson(houseList);
+			System.out.println(json1);
+			response.getWriter().print(json1);
 		/*	for(HouseBean hb : houseList){
 			JSONObject jsonObj = new JSONObject();
 			jsonObj.put("sex", hb.getsex());
 			jsonObj.put("housetype", hb.gethousetype());
 			jsonObj.put("roomtype", hb.getroomtype());
 			jsonObj.put("h_area", hb.geth_area());
+			out.print("[");
 			out.print(jsonObj);
+			out.print("]");
+			out.print(".");
 			out.flush();
 			}*/
 			//request.setAttribute("jsonArray", jsonArray);
