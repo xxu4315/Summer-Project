@@ -3,9 +3,8 @@
     <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<c:out value=" ${houselist} "  escapeXml="false" />
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="application/json; charset=UTF-8">
     <title>Findhouse</title>
   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -19,6 +18,88 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script>
+    function doAjax() {
+    $.ajax({
+        type: "POST",
+        url: "/FindAllHouseCL",
+        data: 'housetype='+document.getElementById("house_type").value+'&sex='+document.getElementById("sex").value
+        +'&roomtype='+document.getElementById("room_type").value+'&h_area='+document.getElementById("h_area").value,
+        dataType: 'json',
+        beforeSend: function(xhr){
+            if (xhr.overrideMimeType)
+            {
+              xhr.overrideMimeType("application/json");
+            }
+          },
+        success: function(msg){
+        	alert("success:"+msg);
+        	var data = msg.table;
+        	 $.each(data, function(i, n){
+        		   var row = $("#template").clone();
+                   row.find("#OrderID").text(n.id);
+                   row.find("#CustomerID").text(n.sex);
+                   row.find("#EmployeeID").text(n.housetype);
+                   row.find("#OrderDate").text(ChangeDate(n.roomtype));
+                   row.attr("id","ready");
+                   row.appendTo("#datas");
+        	 })
+        },
+        error: function(msg){
+        	alert("error:"+msg.status + ' ' + msg.statusText);
+        //	$('#MyDiv').load('/FindAllHouseCL',document.getElementById("jsonArray").value);
+        }
+    });
+    }
+    </script> 
+      <div>
+        &nbsp;<div>
+            <br />
+            <input id="first" type="button" value="  <<  " /><input id="previous" type="button"
+                value="  <  " /><input id="next" type="button" value="  >  " /><input id="last" type="button"
+                    value="  >>  " />
+            &nbsp;<span id="pageinfo"></span>
+            <table id="datas" border="1" cellspacing="0" style="border-collapse: collapse">
+                <tr>
+                    <th>
+                        ID1</th>
+                    <th>
+                        ID2</th>
+                    <th>
+                        ID3</th>
+                    <th>
+                        ID4</th>
+                </tr>
+                <tr id="template">
+                    <td id="OrderID">
+                    </td>
+                    <td id="CustomerID">
+                    </td>
+                    <td id="EmployeeID">
+                    </td>
+                    <td id="OrderDate">
+                    </td>
+                  
+                </tr>
+            </table>
+        </div>
+        <div id="load" style="left: 0px; position: absolute; top: 0px; background-color: red">
+            LOADING....
+        </div>
+        <input type="hidden" id="pagecount" />
+    </div>
+    
+    
+    
+  <!--   <script type="text/javascript">
+  $('#MyDiv').load('/FindAllHouseCL',data);
+   $(document).ready(function(){
+   $("#btnSelect").click(function(){
+   htmlobj=$.ajax({url:"/FindAllHouseCL",async:false});
+   $("#MyDiv").html(htmlobj.responseText);
+    });
+   });
+    </script> -->
+  <!--   <script>
 var xmlHttp;  
 function createXMLHttpRequest()  
 {  
@@ -93,7 +174,7 @@ function parseResults()
  responseDiv.appendChild(responseText);  
  
 }
-</script>
+</script> -->
     <style>
 	.btn-file {
     position: relative;
@@ -309,8 +390,8 @@ if(request.getParameter("error")!=null){
 		</select>           
       </li>
       </ul>
-     <!--   <button type="submit" class="btn btn-success" style="margin-top:0.2cm">Search</button> -->
-	<button type="button" id="btnSignUp" class="btn btn-success" style="margin-top:0.2cm"  value="POST" onclick="doRequestUsingPost();" >Search</button>
+     <!--   <button type="submit" class="btn btn-success" style="margin-top:0.2cm">Search</button> onclick="doRequestUsingPost();"-->
+	<button type="button" id="btnSelect" class="btn btn-success" style="margin-top:0.2cm"  value="POST"  onclick="doAjax();">Search</button>
     <ul class="nav navbar-nav">
      <li class="dropdown">
       <ul class="dropdown-menu">
@@ -340,14 +421,15 @@ if(request.getParameter("error")!=null){
 
 </nav>
 
+
+  <!--  
 <table id="table" name="serverResponse" width="393" border="1" height="37">
 <c:forEach var="bean" items="${houseList}">
-  <!--   <div class="k">
+   <div class="k">
     <a href="#" onMouseOver="show()" onMouseOut="hide()">title: ${bean.gettitle()} </a>
     <div id="show" class="show"  style="display:none" > 
         </div>
 </div>
-    -->
 <tr>
 <td width="8%" height="16">&nbsp;</td>
 <td width="21%" align="left">
@@ -378,12 +460,11 @@ ${bean.getroomtype()}
 </td>
 </tr>
 </c:forEach>
- </table>
-
-   <div class="well" id="serverResponse">
-            <iframe id="serverResponse"></iframe>
-           
-  </div> 
+</table> -->
+    <div id="MyDiv"></div>
+    <div id="serverResponse"> </div> 
+              <c:out value="${bean.geth_area()}" escapeXml="false" /> 
+ 
 </form>
 
 

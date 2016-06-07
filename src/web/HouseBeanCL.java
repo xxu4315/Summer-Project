@@ -66,7 +66,6 @@ public class HouseBeanCL {
 	
 	//get from database
 		public List<HouseBean> findAllHouse(String h_area, String housetype, String roomtype, String sex){
-			System.out.print("findHouse");
 			boolean flag = false;
 			int x;
 			HouseBean obj = null;

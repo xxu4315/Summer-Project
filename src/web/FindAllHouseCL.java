@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 /**
  * Servlet implementation class PostHouseCL
  */
@@ -31,10 +36,9 @@ public class FindAllHouseCL extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("findallhousecl");
 		
 		try{
-			response.setContentType("text/html; charset=UTF-8");
+			//response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();
 			String email = request.getParameter("email");
 			String h_area = request.getParameter("h_area");
@@ -43,9 +47,6 @@ public class FindAllHouseCL extends HttpServlet {
 			String sex = request.getParameter("sex");
 			HouseBeanCL hbc= new HouseBeanCL();
 			List<HouseBean> houseList = hbc.findAllHouse(h_area, housetype, roomtype, sex);
-	//		for(int i = 0; i < houseList.size(); i++){
-	//		String title = houseList.get(i).gettitle();
-	//		System.out.println(title);
 			request.setAttribute("houseList", houseList); 
 			HttpSession session = request.getSession();
 			session.setAttribute("houseList", houseList);
@@ -67,9 +68,16 @@ public class FindAllHouseCL extends HttpServlet {
 			out.println(hb.getwechatid());
 			
 			}
-	       // request.getRequestDispatcher("/ShowHouses.jsp").forward(request,response);
-	//		}
-			out.close();
+			JSONArray jsonArray = JSONArray.fromObject(houseList);
+			System.out.println(jsonArray);
+			String json1 = new Gson().toJson(houseList);
+			response.setContentType("application/json");
+			response.getWriter().write(jsonArray.toString());
+			//request.setAttribute("jsonArray", jsonArray);
+			//System.out.println(json1);
+		//	request.getRequestDispatcher("/addFindWish.jsp").forward(request,response);
+			
+			
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
