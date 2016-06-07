@@ -44,7 +44,7 @@ public class PostHouseCL extends HttpServlet {
 			System.out.println(housetype);
 			String roomtype = request.getParameter("roomtype");
 			System.out.println(roomtype);
-			String sex = request.getParameter("gender");
+			String sex = request.getParameter("sex");
 			System.out.println(sex);
 			String wechatid = request.getParameter("wechatid");
 			System.out.println(wechatid);

@@ -455,9 +455,9 @@ if(request.getParameter("error")!=null){
         <li class="dropdown">
        <select class="form-control" id="room_type" name="roomtype" style="margin-top:0.2cm" required>
 		<option selected="true" disabled="disabled">Room type</option>
-		<option value="'bedroom' OR roomtype='living room' OR roomtype='Other'">All</option>
-		<option value="'bedroom'">Bedroom</option>
-		<option value="'living room'">Living room</option>
+		<option value="'Bedroom' OR roomtype='Living room' OR roomtype='Other'">All</option>
+		<option value="'Bedroom'">Bedroom</option>
+		<option value="'Living room'">Living room</option>
 		<option value="'Other'">Other</option>
 		</select>
       </li>

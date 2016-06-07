@@ -73,6 +73,7 @@ public class HouseBeanCL {
 			try{
 				ConnDB cd = new ConnDB();
 				ct = cd.getConn();
+				//and (housetype="+housetype+") and (sex="+sex+") and (roomtype="+roomtype+")
 				ps = ct.prepareStatement("select * from houseinfo where (h_area="+h_area+") and (housetype="+housetype+") and (sex="+sex+") and (roomtype="+roomtype+")");
 				System.out.println(ps);
 				rs = ps.executeQuery();

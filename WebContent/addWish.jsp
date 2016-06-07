@@ -135,12 +135,12 @@ if(request.getParameter("error")!=null){
 
   <fieldset class="form-group">
     <label for="title">Title</label>
-    <input type="text" class="form-control" id="title" placeholder="Title">
+    <input type="text" class="form-control" id="title" name="title" placeholder="Title">
     <!--<small class="text-muted">We'll never share your email with anyone else.</small>-->
   </fieldset>
   <fieldset class="form-group">
     <label for="address">Address</label>
-    <input type="text" class="form-control" id="h_location" placeholder="Apt No. Street">
+    <input type="text" class="form-control" id="h_location" name="h_location" placeholder="Apt No. Street">
   </fieldset>
   <fieldset class="form-group">
   <label for="area">Area</label>
@@ -204,16 +204,16 @@ if(request.getParameter("error")!=null){
 		<label for="sex">Gender</label>
 		<select class="form-control" id="sex" name="sex" style="width:300px" required>
 		<option selected="true" disabled="disabled">Your Gender</option>
-		<option value="male">Male</option>
-		<option value="female">Female</option>
+		<option value="Male">Male</option>
+		<option value="Female">Female</option>
 		</select>
 	</fieldset>
 	<fieldset class="form-group">
 		<label for="req_gender">Required Gender</label>
 		<select class="form-control" id="req_gender" name="req_gender" style="width:300px" required>
 		<option selected="true" disabled="disabled">Required Gender</option>
-		<option value="male">Male</option>
-		<option value="female">Female</option>
+		<option value="Male">Male</option>
+		<option value="Female">Female</option>
 		<option value="unlimited">Unlimited</option>
 		</select>
 	</fieldset>
@@ -230,7 +230,7 @@ if(request.getParameter("error")!=null){
   </fieldset>
   <fieldset class="form-group">
   <label for="phoneNumber">Your Phone Number</label>
-  <input type="number" id="phonenumber" name="phonenumber" class="form-control" maxlength="12" pattern=".{3}[-].{3}[.].{4}" placeholder="xxx-xxx.xxxx" style="width:300px" >
+  <input type="text" id="phonenumber" name="phonenumber" class="form-control" maxlength="12" pattern=".{3}[-].{3}[.].{4}" placeholder="xxx-xxx.xxxx" style="width:300px" >
   </fieldset>
   <fieldset class="form-group">
  	<label for="wechatid">WechatID</label>
