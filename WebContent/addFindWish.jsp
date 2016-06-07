@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+    <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+	<meta http-equiv="Content-Type" content="application/json; charset=UTF-8">
     <title>Findhouse</title>
   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -21,7 +17,164 @@
     <script src="../static/js/jquery-1.11.2.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script>
+    function doAjax() {
+    $.ajax({
+        type: "POST",
+        url: "/FindAllHouseCL",
+        data: 'housetype='+document.getElementById("house_type").value+'&sex='+document.getElementById("sex").value
+        +'&roomtype='+document.getElementById("room_type").value+'&h_area='+document.getElementById("h_area").value,
+        dataType: 'json',
+        beforeSend: function(xhr){
+            if (xhr.overrideMimeType)
+            {
+              xhr.overrideMimeType("application/json");
+            }
+          },
+        success: function(msg){
+        	alert("success:"+msg);
+        	var data = msg.table;
+        	 $.each(data, function(i, n){
+        		   var row = $("#template").clone();
+                   row.find("#OrderID").text(n.id);
+                   row.find("#CustomerID").text(n.sex);
+                   row.find("#EmployeeID").text(n.housetype);
+                   row.find("#OrderDate").text(ChangeDate(n.roomtype));
+                   row.attr("id","ready");
+                   row.appendTo("#datas");
+        	 })
+        },
+        error: function(msg){
+        	alert("error:"+msg.status + ' ' + msg.statusText);
+        //	$('#MyDiv').load('/FindAllHouseCL',document.getElementById("jsonArray").value);
+        }
+    });
+    }
+    </script> 
+      <div>
+        &nbsp;<div>
+            <br />
+            <input id="first" type="button" value="  <<  " /><input id="previous" type="button"
+                value="  <  " /><input id="next" type="button" value="  >  " /><input id="last" type="button"
+                    value="  >>  " />
+            &nbsp;<span id="pageinfo"></span>
+            <table id="datas" border="1" cellspacing="0" style="border-collapse: collapse">
+                <tr>
+                    <th>
+                        ID1</th>
+                    <th>
+                        ID2</th>
+                    <th>
+                        ID3</th>
+                    <th>
+                        ID4</th>
+                </tr>
+                <tr id="template">
+                    <td id="OrderID">
+                    </td>
+                    <td id="CustomerID">
+                    </td>
+                    <td id="EmployeeID">
+                    </td>
+                    <td id="OrderDate">
+                    </td>
+                  
+                </tr>
+            </table>
+        </div>
+        <div id="load" style="left: 0px; position: absolute; top: 0px; background-color: red">
+            LOADING....
+        </div>
+        <input type="hidden" id="pagecount" />
+    </div>
+    
+    
+    
+  <!--   <script type="text/javascript">
+  $('#MyDiv').load('/FindAllHouseCL',data);
+   $(document).ready(function(){
+   $("#btnSelect").click(function(){
+   htmlobj=$.ajax({url:"/FindAllHouseCL",async:false});
+   $("#MyDiv").html(htmlobj.responseText);
+    });
+   });
+    </script> -->
+  <!--   <script>
+var xmlHttp;  
+function createXMLHttpRequest()  
+{  
+	
+ if(window.ActiveXObject)  
+ {  
+  xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");  
+ }  
+ else if(window.XMLHttpRequest)  
+ {  
+  xmlHttp=new XMLHttpRequest();  
+ }  
+}  
+  
+function createQueryString()  
+{  
+ var housetype=document.getElementById("house_type").value;  
+ var h_area=document.getElementById("h_area").value;  
+ var roomtype=document.getElementById("room_type").value; 
+ var sex=document.getElementById("sex").value;  
+ var queryString="housetype=" + housetype + "&h_area=" + h_area + "&roomtype=" + roomtype + "&sex=" + sex ;  
+ return queryString;  
+}  
+  
+function doRequestUsingGET()  
+{  
+ createXMLHttpRequest();  
+ var queryString="./FindAllHouseCL?";  
+ queryString=queryString+createQueryString() + "&timeStamp=" + new Date().getTime();  
+ xmlHttp.onreadystatechange=handleStateChange;  
+ xmlHttp.open("GET",queryString,true);  
+ xmlHttp.send(null);  
+}  
+  
+function doRequestUsingPost()  
+{ 
+	
+ createXMLHttpRequest();  
+ var url="./FindAllHouseCL?timeStamp=" + new Date().getTime();  
+ var queryString=createQueryString();  
+ xmlHttp.open("POST",url,true);  
+ xmlHttp.onreadystatechange=handleStateChange;  
+ xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");  
+ xmlHttp.send(queryString);  
+}  
+  
+  
+function handleStateChange()  
+{  
+ if(xmlHttp.readyState==4)  
+ {  
+  if(xmlHttp.status==200)  
+  {  
+   parseResults();  
+  }  
+ }  
+}  
+  
+function parseResults()  
+{  
+ var responseDiv=document.getElementById("serverResponse");
+ var status = xmlHttp.responseText.length;
+ var Email = document.getElementById("serverResponse")
+ if(responseDiv.hasChildNodes())  
+ {  
+  responseDiv.removeChild(responseDiv.childNodes[0]);  
+ }
 
+
+ var responseText=document.createTextNode(xmlHttp.responseText);  
+  alert("NOTE： "+xmlHttp.responseText);  
+ responseDiv.appendChild(responseText);  
+ 
+}
+</script> -->
     <style>
 	.btn-file {
     position: relative;
@@ -151,7 +304,7 @@ if(request.getParameter("error")!=null){
         </nav>
           <h3 class="text-muted">Duck Life</h3>
       </div>
-<form action="/FindAllHouseCL"  method="post">
+<form  method="post" action="#" id="searchform" name="searchform">
 <input type=hidden id=email name=email value="<%=request.getParameter("email") %>">       
 <nav class="navbar navbar-default" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
@@ -171,63 +324,74 @@ if(request.getParameter("error")!=null){
      <li class="dropdown">
         <select class="form-control" id="h_area" name="h_area" style="margin-top:0.2cm">
          <option selected="true" disabled="disabled">Area</option>
-  		 <option value="Jersey City">Jersey City</option>
-  		 <option value="Union City">Union City</option>
-  		 <option value="Hoboken">Hoboken</option>
-  		 <option value="Weehawken">Weehawken</option>
-  		 <option value="New Port">New Port</option>
-         <option value="Jersey City">Other</option>
+         <option value="'Jersey City' OR h_area='Union City' OR h_area='Hoboken' OR h_area='Weehawken'
+         OR h_area='New Port' OR h_area='Other'">All</option>
+  		 <option value="'Jersey City'">Jersey City</option>
+  		 <option value="'Union City'">Union City</option>
+  		 <option value="'Hoboken'">Hoboken</option>
+  		 <option value="'Weehawken'">Weehawken</option>
+  		 <option value="'New Port'">New Port</option>
+         <option value="'Other'">Other</option>
 		 </select>
       </li>
         <li class="dropdown">
         	 <select class="form-control" id="house_type" required="required" style="margin-top:0.2cm" name="housetype">
     <option selected="true" disabled="disabled">House type</option>
+  <optgroup label="All">
+    <option value="'1B/1B' OR housetype = '2B/1B' OR housetype = '2B/1.5B' OR housetype = '2B/2B' OR housetype = '3B/1B'
+    OR housetype = '3B/1.5B' OR housetype = '3B/2B' OR housetype = '3B/2.5B' OR housetype = '3B/3B' OR housetype = '4B/2B'
+    OR housetype = '4B/2.5B' OR housetype = '4B/3B' OR housetype = '5B/2B' OR housetype = '5B/2.5B' OR housetype = '5B/3B'
+    OR housetype = '5B/4B' OR housetype = 'Other'">All</option>
+  </optgroup>  
   <optgroup label="1Bed">
-    <option value="1B/1B">1B/1B</option>
+    <option value="'1B/1B'">1B/1B</option>
   </optgroup>
   <optgroup label="2Bed">
-    <option value="2B/1B">2B/1B</option>
-    <option value="2B/1.5B">2B/1.5B</option>
-    <option value="2B/2B">2B/2B</option>
+    <option value="'2B/1B'">2B/1B</option>
+    <option value="'2B/1.5B'">2B/1.5B</option>
+    <option value="'2B/2B'">2B/2B</option>
   </optgroup>
   <optgroup label="3Bed">
-    <option value="3B/1B">3B/1B</option>
-    <option value="3B/1.5B">3B/1.5B</option>
-    <option value="3B/2B">3B/2B</option>
-    <option value="3B/2.5B">3B/2.5B</option>
-    <option value="3B/3B">3B/3B</option>
+    <option value="'3B/1B'">3B/1B</option>
+    <option value="'3B/1.5B'">3B/1.5B</option>
+    <option value="'3B/2B'">3B/2B</option>
+    <option value="'3B/2.5B'">3B/2.5B</option>
+    <option value="'3B/3B'">3B/3B</option>
   </optgroup>
   <optgroup label="4Bed">
-    <option value="4B/2B">4B/2B</option>
-    <option value="4B/2.5B">4B/2.5B</option>
-    <option value="4B/3B">4B/3B</option>
+    <option value="'4B/2B'">4B/2B</option>
+    <option value="'4B/2.5B'">4B/2.5B</option>
+    <option value="'4B/3B'">4B/3B</option>
   </optgroup>
   <optgroup label="5Bed">
-  	<option value="5B/2B">5B/2B</option>
-  	<option value="5B/2.5B">5B/2.5B</option>
-  	<option value="5B/3B">5B/3B</option>
-  	<option value="5B/4B">5B/4B</option>
-  	<option value="Other">Other</option>
+  	<option value="'5B/2B'">5B/2B</option>
+  	<option value="'5B/2.5B'">5B/2.5B</option>
+  	<option value="'5B/3B'">5B/3B</option>
+  	<option value="'5B/4B'">5B/4B</option>
+  	<option value="'Other'">Other</option>
     </optgroup>
    </select> 
       </li>
         <li class="dropdown">
        <select class="form-control" id="room_type" name="roomtype" style="margin-top:0.2cm" required>
 		<option selected="true" disabled="disabled">Room type</option>
-		<option value="Bedroom">Bedroom</option>
-		<option value="Living room">Living room</option>
-		<option value="Other">Other</option>
+		<option value="'bedroom' OR roomtype='living room' OR roomtype='Other'">All</option>
+		<option value="'bedroom'">Bedroom</option>
+		<option value="'living room'">Living room</option>
+		<option value="'Other'">Other</option>
 		</select>
       </li>
       <li class="dropdown">  
-       <select class="form-control" id="gender" name="gender" style="margin-top:0.2cm" required>
+       <select class="form-control" id="sex" name="sex" style="margin-top:0.2cm" required>
 		<option selected="true" disabled="disabled">Gender</option>
-		<option value="male">Male</option>
-		<option value="female">Female</option>
+		<option value="'Male' OR sex='Female'">All</option>
+		<option value="'Male'">Male</option>
+		<option value="'Female'">Female</option>
 		</select>           
       </li>
       </ul>
-      <button type="submit" class="btn btn-success" style="margin-top:0.2cm">Search</button>   
+     <!--   <button type="submit" class="btn btn-success" style="margin-top:0.2cm">Search</button> onclick="doRequestUsingPost();"-->
+	<button type="button" id="btnSelect" class="btn btn-success" style="margin-top:0.2cm"  value="POST"  onclick="doAjax();">Search</button>
     <ul class="nav navbar-nav">
      <li class="dropdown">
       <ul class="dropdown-menu">
@@ -256,13 +420,55 @@ if(request.getParameter("error")!=null){
    
 
 </nav>
+
+
+  <!--  
+<table id="table" name="serverResponse" width="393" border="1" height="37">
+<c:forEach var="bean" items="${houseList}">
+   <div class="k">
+    <a href="#" onMouseOver="show()" onMouseOut="hide()">title: ${bean.gettitle()} </a>
+    <div id="show" class="show"  style="display:none" > 
+        </div>
+</div>
+<tr>
+<td width="8%" height="16">&nbsp;</td>
+<td width="21%" align="left">
+<input type="text" name="serverResponse" id="serverResponse"  value="${bean.gettitle()}"/>
+<br/> 
+${bean.gethouseinfo()}
+<br/> 
+${bean.geth_location()}
+<br/> 
+${bean.geth_area()}
+<br/> 
+${bean.gethousetype()}
+<br/> 
+${bean.getid()}
+<br/> 
+${bean.getwechatid()}
+<br/> 
+${bean.getsex()}
+<br/> 
+${bean.getqq()}
+<br/> 
+${bean.getphonenumber()}
+<br/> 
+${bean.getprice()}
+<br/> 
+${bean.getroomtype()}
+<br/> 
+</td>
+</tr>
+</c:forEach>
+</table> -->
+    <div id="MyDiv"></div>
+    <div id="serverResponse"> </div> 
+              <c:out value="${bean.geth_area()}" escapeXml="false" /> 
+ 
 </form>
 
-        <div class="well">
-            <iframe id="iframe1"></iframe>
-            <iframe id="iframe2"></iframe>
-        </div>
 
+        
 	
  <footer class="footer">
                 <p>&copy; Yaoshuai 2016</p>

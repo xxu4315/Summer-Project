@@ -49,7 +49,6 @@ public class RegisterCL extends HttpServlet {
 				else{
 					String regex="[a-zA-Z0-9_\\-\\.]+@(stevens)+(\\.(edu))" ;
 					if(Email.matches(regex)){
-						System.out.println("yes");
 						request.setAttribute("Email", Email);
 						String status = "success";
 						request.setAttribute("status", status);
@@ -59,7 +58,6 @@ public class RegisterCL extends HttpServlet {
 						//request.getRequestDispatcher("/signup.jsp").forward(request,response); 
 					}
 					else{	
-						System.out.println("no");
 						String status = "fail";
 						request.setAttribute("status", status);
 						HttpSession session = request.getSession();
