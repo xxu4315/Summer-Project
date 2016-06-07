@@ -50,7 +50,7 @@ public class FindAllHouseCL extends HttpServlet {
 			request.setAttribute("houseList", houseList); 
 			HttpSession session = request.getSession();
 			session.setAttribute("houseList", houseList);
-			for(HouseBean hb : houseList){
+		/*	for(HouseBean hb : houseList){
 			out.println(hb.gettitle()+"<br/>");
             out.flush();
 			out.println(hb.gethouseinfo()+"<br/>");
@@ -67,12 +67,21 @@ public class FindAllHouseCL extends HttpServlet {
 			out.println(hb.getqq());
 			out.println(hb.getwechatid());
 			
-			}
+			}*/
 			JSONArray jsonArray = JSONArray.fromObject(houseList);
 			System.out.println(jsonArray);
 			String json1 = new Gson().toJson(houseList);
 			response.setContentType("application/json");
-			response.getWriter().write(jsonArray.toString());
+			response.getWriter().write(json1);
+		/*	for(HouseBean hb : houseList){
+			JSONObject jsonObj = new JSONObject();
+			jsonObj.put("sex", hb.getsex());
+			jsonObj.put("housetype", hb.gethousetype());
+			jsonObj.put("roomtype", hb.getroomtype());
+			jsonObj.put("h_area", hb.geth_area());
+			out.print(jsonObj);
+			out.flush();
+			}*/
 			//request.setAttribute("jsonArray", jsonArray);
 			//System.out.println(json1);
 		//	request.getRequestDispatcher("/addFindWish.jsp").forward(request,response);

@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="application/json; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Findhouse</title>
   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -32,7 +32,7 @@
             }
           },
         success: function(msg){
-        	alert("success:"+msg);
+        	console.log(msg);
         	var data = msg.table;
         	 $.each(data, function(i, n){
         		   var row = $("#template").clone();
@@ -46,6 +46,7 @@
         },
         error: function(msg){
         	alert("error:"+msg.status + ' ' + msg.statusText);
+        	console.log(msg);
         //	$('#MyDiv').load('/FindAllHouseCL',document.getElementById("jsonArray").value);
         }
     });
@@ -99,7 +100,7 @@
     });
    });
     </script> -->
-  <!--   <script>
+  <script>
 var xmlHttp;  
 function createXMLHttpRequest()  
 {  
@@ -170,11 +171,20 @@ function parseResults()
 
 
  var responseText=document.createTextNode(xmlHttp.responseText);  
-  alert("NOTE： "+xmlHttp.responseText);  
+  /*   alert("NOTE： "+xmlHttp.responseText);  */ 
  responseDiv.appendChild(responseText);  
- 
+ var data = msg.table;
+ $.each(responseText, function(i, n){
+	   var row = $("#template").clone();
+       row.find("#OrderID").text(n.id);
+       row.find("#CustomerID").text(n.sex);
+       row.find("#EmployeeID").text(n.housetype);
+       row.find("#OrderDate").text(ChangeDate(n.roomtype));
+       row.attr("id","ready");
+       row.appendTo("#datas");
+ })
 }
-</script> -->
+</script>
     <style>
 	.btn-file {
     position: relative;
@@ -390,8 +400,8 @@ if(request.getParameter("error")!=null){
 		</select>           
       </li>
       </ul>
-     <!--   <button type="submit" class="btn btn-success" style="margin-top:0.2cm">Search</button> onclick="doRequestUsingPost();"-->
-	<button type="button" id="btnSelect" class="btn btn-success" style="margin-top:0.2cm"  value="POST"  onclick="doAjax();">Search</button>
+     <!--   <button type="submit" class="btn btn-success" style="margin-top:0.2cm">Search</button> onclick="doRequestUsingPost();" doAjax();-->
+	<button type="button" id="btnSelect" class="btn btn-success" style="margin-top:0.2cm"  value="POST"  onclick="doRequestUsingPost();">Search</button>
     <ul class="nav navbar-nav">
      <li class="dropdown">
       <ul class="dropdown-menu">
@@ -462,8 +472,7 @@ ${bean.getroomtype()}
 </c:forEach>
 </table> -->
     <div id="MyDiv"></div>
-    <div id="serverResponse"> </div> 
-              <c:out value="${bean.geth_area()}" escapeXml="false" /> 
+    <div id="serverResponse"> </div>  
  
 </form>
 
