@@ -21,10 +21,11 @@ if(request.getParameter("error")!=null){
     <title>Add Post</title>
 
    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
+   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
-    
+	<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/sb-admin-2.css" rel="stylesheet">
     <script src="../static/js/jquery-1.11.2.js"></script>
 
 	<script src="../static/js/jquery.ui.widget.js"></script>
@@ -100,6 +101,34 @@ if(request.getParameter("error")!=null){
             width: auto;
             
         }
+        .dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 10px 10px;
+}
+
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
         .well {
         	
         }
@@ -116,10 +145,31 @@ if(request.getParameter("error")!=null){
         <nav>
           <ul class="nav nav-pills pull-right">
               <li role="presentation"><a style="color:#A52A2A" target="_blank" href="https://shibboleth.stevens.edu/idp/Authn/UserPassword">MyStevens</a></li>
-	           <li role="presentation"><a href="/userHome.jsp">Home</a></li>
+	           <li role="presentation"><a href="/index.jsp">Home</a></li>
                
                <li role="presentation"><a href="/userHome.jsp">My DuckLife</a></li>
-	           <li role="presentation" class="active"><a href="#">Add Post</a></li>
+	           <li role="presentation">
+	           <div class="dropdown">
+  					<button class="btn btn-default dropdown-toggle" style="height:40px" type="button" data-toggle="dropdown">Add Post
+  					<span class="caret"></span></button>
+  					<ul class="dropdown-menu">
+    					<li>
+    					<form action="/addWish.jsp" method="post">
+    					<input type="hidden" id="hidden 1" name=email value="<%=request.getParameter("Email") %>">
+    					<button type="submit" class="btn btn-link">Housing</button>
+    					</form>
+    					</li>
+    					<li><form action="/" method="post">
+    					<input type="hidden" id="hidden 1" name=email value="<%=request.getParameter("Email") %>">
+    					<button type="submit" class="btn btn-link">Academics</button>
+    					</form></li>
+    					<li><form action="/" method="post">
+    					<input type="hidden" id="hidden 1" name=email value="<%=request.getParameter("Email") %>">
+    					<button type="submit" class="btn btn-link">Dining</button>
+    					</form></li>
+  					</ul>
+					</div>
+	           </li>
                <li role="presentation" ><a href="/signin.jsp">Logout</a></li>
           </ul>
         </nav>
@@ -230,7 +280,7 @@ if(request.getParameter("error")!=null){
   </fieldset>
   <fieldset class="form-group">
   <label for="phoneNumber">Your Phone Number</label>
-  <input type="text" id="phonenumber" name="phonenumber" class="form-control" maxlength="12" pattern=".{3}[-].{3}[.].{4}" placeholder="xxx-xxx.xxxx" style="width:300px" >
+  <input type="text" id="phonenumber" name="phonenumber" class="form-control" maxlength="12" style="width:300px" >
   </fieldset>
   <fieldset class="form-group">
  	<label for="wechatid">WechatID</label>
