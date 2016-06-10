@@ -21,27 +21,6 @@
     <script src="http://maps.googleapis.com/maps/api/js"></script> 
    
     <script>
-    /*var myCenter=new google.maps.LatLng(51.508742,-0.120850);
-    function initialize()
-    {
-      var mapProp = {
-        center: new google.maps.LatLng(51.508742,-0.120850),
-        zoom:7,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      var map = new google.maps.Map(document.getElementById("map"),mapProp);
-      var marker=new google.maps.Marker({
-    	  position:myCenter,    	      	
-    	  });
-    	marker.setMap(map); 
-      var infowindow = new google.maps.InfoWindow({
-      	content:"Hello World!"
-    		 });
-      google.maps.event.addListener(marker, 'click', function() {
-    	  infowindow.open(map,marker);
-    	  });
-    	
-    }*/
     function initialize() {
     	  var map = new google.maps.Map(document.getElementById('map'), {
     	    center: {lat: -34.397, lng: 150.644},
@@ -62,10 +41,6 @@
     	    	marker.setMap(map); 
     	      var infowindow = new google.maps.InfoWindow({
     	      	content:"Your location!"});
-    	      //infoWindow.setPosition(pos);
-    	      //google.maps.event.addListener(marker, 'click', function() {
-    	  	  	//infowindow.open(map,marker);
-    	  	 // });
     	      map.setCenter(pos);
     	    }, function() {
     	      handleLocationError(true, infoWindow, map.getCenter());
@@ -83,32 +58,6 @@
     	                        'Error: Your browser doesn\'t support geolocation.');
     	}
     	google.maps.event.addDomListener(window, 'load', initialize);
-    	/*function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 15,
-              center: {lat: -34.397, lng: 150.644}
-            });
-            var geocoder = new google.maps.Geocoder();
-
-            document.getElementById('').addEventListener('click', function() {
-              geocodeAddress(geocoder, map);
-            });
-          }
-
-          function geocodeAddress(geocoder, resultsMap) {
-            //var address = document.getElementById('address').value;
-            geocoder.geocode({'address': address}, function(results, status) {
-              if (status === google.maps.GeocoderStatus.OK) {
-                resultsMap.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                  map: resultsMap,
-                  position: results[0].geometry.location
-                });
-              } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-              }
-            });
-          }*/
     
   
     </script>
@@ -301,30 +250,31 @@ function parseResults()
   	  	//});
     
    
-	for (j=0; j<Info.length; j++)
+	for (var e=0; e<Info.length; e++)
 		{
 		
-	
-		geocoder.geocode({'address': address[j]}, function(results, status) {
+		(function (e) {
+		geocoder.geocode({'address': address[e]}, function(results, status) {
 	        if (status === google.maps.GeocoderStatus.OK) {
 	        	
 	          //map.setCenter(results[0].geometry.location);
 	          	marker = new google.maps.Marker({
 	            map: map,
 	            position: results[0].geometry.location,
-	            dataId:j
+	            dataId:e
 	            
 	          });
 	          
 	          
 	            google.maps.event.addListener(marker,'click', function() {
 	            	infowindow.close();
-	            	infowindow.setContent('<div class="container" style="border-radius:9px">'+'<div class="well">'+Info[j-1]+'</div>'+'</div>');
+	            	infowindow.setContent('<div class="container" style="border-radius:9px">'+'<div class="well">'+Info[e]+'</div>'+'</div>');
 	          	   	infowindow.open(map, this);
-	          	   console.log(j);
+	          	   console.log(e);
 	            });
 	        }
 	      });
+		}).call(this, e);
 		
 		}
 
