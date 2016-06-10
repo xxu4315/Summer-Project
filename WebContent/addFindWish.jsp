@@ -18,6 +18,101 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../static/js/jquery.dynatable.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script> 
+   
+    <script>
+    /*var myCenter=new google.maps.LatLng(51.508742,-0.120850);
+    function initialize()
+    {
+      var mapProp = {
+        center: new google.maps.LatLng(51.508742,-0.120850),
+        zoom:7,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("map"),mapProp);
+      var marker=new google.maps.Marker({
+    	  position:myCenter,    	      	
+    	  });
+    	marker.setMap(map); 
+      var infowindow = new google.maps.InfoWindow({
+      	content:"Hello World!"
+    		 });
+      google.maps.event.addListener(marker, 'click', function() {
+    	  infowindow.open(map,marker);
+    	  });
+    	
+    }*/
+    function initialize() {
+    	  var map = new google.maps.Map(document.getElementById('map'), {
+    	    center: {lat: -34.397, lng: 150.644},
+    	    zoom: 15
+    	  });
+    	  
+
+    	  // Try HTML5 geolocation.
+    	  if (navigator.geolocation) {
+    	    navigator.geolocation.getCurrentPosition(function(position) {
+    	      var pos = {
+    	        lat: position.coords.latitude,
+    	        lng: position.coords.longitude
+    	      };
+    	      var marker=new google.maps.Marker({
+    	    	  position:pos,    	      	
+    	    	  });
+    	    	marker.setMap(map); 
+    	      var infowindow = new google.maps.InfoWindow({
+    	      	content:"Your location!"});
+    	      //infoWindow.setPosition(pos);
+    	      //google.maps.event.addListener(marker, 'click', function() {
+    	  	  	//infowindow.open(map,marker);
+    	  	 // });
+    	      map.setCenter(pos);
+    	    }, function() {
+    	      handleLocationError(true, infoWindow, map.getCenter());
+    	    });
+    	  } else {
+    	    // Browser doesn't support Geolocation
+    	    handleLocationError(false, infoWindow, map.getCenter());
+    	  }
+    	}
+
+    	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    	  infoWindow.setPosition(pos);
+    	  infoWindow.setContent(browserHasGeolocation ?
+    	                        'Error: The Geolocation service failed.' :
+    	                        'Error: Your browser doesn\'t support geolocation.');
+    	}
+    	google.maps.event.addDomListener(window, 'load', initialize);
+    	/*function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 15,
+              center: {lat: -34.397, lng: 150.644}
+            });
+            var geocoder = new google.maps.Geocoder();
+
+            document.getElementById('').addEventListener('click', function() {
+              geocodeAddress(geocoder, map);
+            });
+          }
+
+          function geocodeAddress(geocoder, resultsMap) {
+            //var address = document.getElementById('address').value;
+            geocoder.geocode({'address': address}, function(results, status) {
+              if (status === google.maps.GeocoderStatus.OK) {
+                resultsMap.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                  map: resultsMap,
+                  position: results[0].geometry.location
+                });
+              } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+              }
+            });
+          }*/
+    
+  
+    </script>
+    
     <script>
     function doAjax() {
     $.ajax({
@@ -53,54 +148,7 @@
     });
     }
     </script> 
-     <%--  <div>
-        &nbsp;<div>
-            <br />
-            <input id="first" type="button" value="  <<  " /><input id="previous" type="button"
-                value="  <  " /><input id="next" type="button" value="  >  " /><input id="last" type="button"
-                    value="  >>  " />
-            &nbsp;<span id="pageinfo"></span>
-            <table id="datas" border="1" cellspacing="0" style="border-collapse: collapse">
-                <tr>
-                    <th>
-                        ID1</th>
-                    <th>
-                        ID2</th>
-                    <th>
-                        ID3</th>
-                    <th>
-                        ID4</th>
-                </tr>
-                <tr id="template">
-                    <td id="OrderID">
-                    </td>
-                    <td id="CustomerID">
-                    </td>
-                    <td id="EmployeeID">
-                    </td>
-                    <td id="OrderDate">
-                    </td>
-                  
-                </tr>
-            </table>
-        </div>
-        <div id="load" style="left: 0px; position: absolute; top: 0px; background-color: red">
-            LOADING....
-        </div>
-        <input type="hidden" id="pagecount" />
-    </div> --%>
     
-    
-    
-  <!--   <script type="text/javascript">
-  $('#MyDiv').load('/FindAllHouseCL',data);
-   $(document).ready(function(){
-   $("#btnSelect").click(function(){
-   htmlobj=$.ajax({url:"/FindAllHouseCL",async:false});
-   $("#MyDiv").html(htmlobj.responseText);
-    });
-   });
-    </script> -->
   <script>
   function IsValidJSON(test) {
 	    try {
@@ -168,72 +216,118 @@ function handleStateChange()
   if(xmlHttp.status==200)  
   {  
    parseResults(); 
- // myFunction(xmlHttp.responseText);
+
   }  
  }  
 }  
   
 function parseResults()  
 {  
-	/* alert(IsValidJSON(xmlHttp.responseText));
-	alert(xmlHttp.responseText); */
-	var text1 = '{"housing":'+xmlHttp.responseText.toString()+"}";
-/* 	alert(IsValidJSON(text));
-	alert(text); */
-	var text = '{"employees":[' +
+
+	var text = '{"housing":'+xmlHttp.responseText.toString()+"}";
+
+	/*var text = '{"employees":[' +
 	'{"firstName":"John","lastName":"Doe" },' +
 	'{"firstName":"Anna","lastName":"Smith" },' +
-	'{"firstName":"Peter","lastName":"Jones" }]}';
-	var response = JSON.parse(text1);
+	'{"firstName":"Peter","lastName":"Jones" }]}';*/
+	var response = JSON.parse(text);
 	var x;
+	var i;
+	var Info = [];
+	var address = [];
+	var frameCon = "";
+	
 	for (x in response.housing)
 	{
-	document.getElementById("demo").innerHTML +=
-	response.housing[x].title + "<br>" + response.housing[x].housetype +"<br>" + response.housing[x].roomtype
+	
+	Info.push(response.housing[x].title + "<br>" + response.housing[x].housetype +"<br>" + response.housing[x].roomtype
 	+"<br>" + response.housing[x].houseinfo+"<br>" + response.housing[x].sex+"<br>" + response.housing[x].phonenumber
-	+"<br>" + response.housing[x].price+"<br>" + response.housing[x].h_location+"<br>"+ response.housing[x].id
-	+"<br>" + response.housing[x].h_area +"<br>"+"--------------------------------"+"<br>";
+	+"<br>" + "$" + response.housing[x].price+"<br>" + response.housing[x].h_location+"<br>"+ response.housing[x].id
+	+"<br>" + response.housing[x].h_area +"<br>"+"--------------------------------"+"<br>");
+	address.push(response.housing[x].h_location+" "+response.housing[x].h_area+","+"NJ");
 	}
-	//var $records = $(response),
-   // myRecords = JSON.parse($records.text());
-	/* $('#tableIdToFill').dynatable({
-		  dataset: {
-		    ajax: true,
-		    ajaxUrl: '/FindAllHouseCL',
-		    ajaxOnLoad: true,
-		    records: []
-		  }
-		}); */
+	Info.reverse();
+	address.reverse();
+	
+	var frame = document.getElementById("frame02"),
+	frameDoc = frame.contentDocument || frame.contentWindow.document;
+	for (i=0; i<Info.length; i++){
+		frameCon += Info[i];
+	}
+	
+		
+	frameDoc.documentElement.innerHTML = frameCon;
+	var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: {lat: -34.397, lng: 150.644}
+	});
+	var geocoder = new google.maps.Geocoder();
+	
+	var j;
+	var contentString = [];
+	for (j=0; j<Info.length; j++){
+		contentString.push('<div class="container" style="border-radius:9px">'+'<div class="well">'+Info[j]+'</div>'+'</div>');
+	}
 
-   // myRecords = JSON.parse($records.text());
-	//var response = JSON.stringby(xmlHttp.responseText);
-/* 	$('#tableIdToFill').dynatable({
-		  dataset: {
-		    records: myRecords1
-		  }
-		});
- var responseDiv=document.getElementById("serverResponse");
- var status = xmlHttp.responseText.length;
- var Email = document.getElementById("serverResponse")
- if(responseDiv.hasChildNodes())  
- {  
-  responseDiv.removeChild(responseDiv.childNodes[0]);  
- }
+	 var infowindow = null;
+	 infowindow = new google.maps.InfoWindow({
+    	    //content: contentString,
+    	  	maxWidth: 250,
+    	  	maxHeight: 250,     	  	
+        });
+	geocoder.geocode({'address': address[0]}, function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+          map.setCenter(results[0].geometry.location);
+         /* marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+          });
+         
+          
+          google.maps.event.addListener(marker,'click', function() {
+        	  infowindow.setContent(contentString[0]);
+              infowindow.open(map,this);
+        	  
+        	  
+          });*/
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+	
+      //infoWindow.setPosition(pos);
+      //google.maps.event.addListener(marker, 'click', function() {
+  	  	//infowindow.open(map,marker);
+  	  	//});
+    
+   
+	for (j=0; j<Info.length; j++)
+		{
+		
+	
+		geocoder.geocode({'address': address[j]}, function(results, status) {
+	        if (status === google.maps.GeocoderStatus.OK) {
+	        	
+	          //map.setCenter(results[0].geometry.location);
+	          	marker = new google.maps.Marker({
+	            map: map,
+	            position: results[0].geometry.location,
+	            dataId:j
+	            
+	          });
+	          
+	          
+	            google.maps.event.addListener(marker,'click', function() {
+	            	infowindow.close();
+	            	infowindow.setContent('<div class="container" style="border-radius:9px">'+'<div class="well">'+Info[j-1]+'</div>'+'</div>');
+	          	   	infowindow.open(map, this);
+	          	   console.log(j);
+	            });
+	        }
+	      });
+		
+		}
 
-
- var responseText=document.createTextNode(xmlHttp.responseText);  
-    alert("NOTE： "+xmlHttp.responseText);  
- responseDiv.appendChild(responseText);  
-
-  
-  $.each(data, function(i, n){
-	   var row = $("#template").clone();
-       row.find("#OrderID").text(n.id);
-       row.find("#CustomerID").text(n.sex);
-       row.find("#EmployeeID").text(n.housetype);
-       row.attr("id","ready");
-       row.appendTo("#datas");
- })  */
 }
 function myFunction(response) {
 	alert(typeof (response));
@@ -322,13 +416,22 @@ function myFunction(response) {
         max-width: 100%;
     }
 }
-	#iframe1 {
+	#frame01 {
 		width:600px;
-		height:600px;
+		height:500px;
 	}
-	#iframe2 {
+	#frame02 {
 		width:300px;
-		height:600px;
+		height:500px;
+	}
+	iframe {
+		
+		border:"0";
+	}
+	#map {
+	height:500px;
+	width:600px;
+	background-color: #CCC;
 	}
 </style>
 
@@ -476,100 +579,31 @@ if(request.getParameter("error")!=null){
      <li class="dropdown">
       <ul class="dropdown-menu">
       <li>
-      <!--<form class="form-group" role="form" name="price" method="post" accept-charset="UTF-8" id="login-nav">
-      <div class="form-group">
-											 <label class="control-label" for="min">Minimum</label>
-											 <input type="text" name="minimum" class="form-control" id="minimum" placeholder="$" style="width:2.0cm" required>
-										</div>
-										<div class="form-group">
-											 <label class="control-label" for="max">Maximum</label>
-											 <input type="text" name="maximum" class="form-control" id="maximum" placeholder="$" style="width:2.0cm" required>
-                                             
-										</div>
-										</form>-->
-										</li>
+     
+	 </li>
 										
       </ul>
       </li>
       </ul>
-      
-      
-    
-      
-
-   
-
 </nav>
 
-
-  <!--  
-<table id="table" name="serverResponse" width="393" border="1" height="37">
-<c:forEach var="bean" items="${houseList}">
-   <div class="k">
-    <a href="#" onMouseOver="show()" onMouseOut="hide()">title: ${bean.gettitle()} </a>
-    <div id="show" class="show"  style="display:none" > 
-        </div>
+<div class="well">
+	<div class="row">
+	<div class="col-sm-6 col-md-6" id="map" height="500px" width="600px">
+	</div>
+	<div class="col-sm-3-col-md-3">
+	<!--<iframe frameborder="0" id="frame01" name="frame01" src="https://www.google.com/maps/embed/v1/search?key=AIzaSyA7nNdnh5sv5jtdj2mYq9XSicBMqM_OpGE &q=1102+Garden+Street,Hoboken,New+Jersey"></iframe>-->
+	<iframe frameborder="0" id="frame02" name="frame02"></iframe>
+	</div>
+	</div>
 </div>
-<tr>
-<td width="8%" height="16">&nbsp;</td>
-<td width="21%" align="left">
-<input type="text" name="serverResponse" id="serverResponse"  value="${bean.gettitle()}"/>
-<br/> 
-${bean.gethouseinfo()}
-<br/> 
-${bean.geth_location()}
-<br/> 
-${bean.geth_area()}
-<br/> 
-${bean.gethousetype()}
-<br/> 
-${bean.getid()}
-<br/> 
-${bean.getwechatid()}
-<br/> 
-${bean.getsex()}
-<br/> 
-${bean.getqq()}
-<br/> 
-${bean.getphonenumber()}
-<br/> 
-${bean.getprice()}
-<br/> 
-${bean.getroomtype()}
-<br/> 
-</td>
-</tr>
-</c:forEach>
-</table> -->
-<div id="demo"></div>
-    <div id="MyDiv"></div>
-    <div id="serverResponse"> </div>  
-    <div id="id01"></div>
-    <!-- <table id="tableIdToFill" class="display" cellspacing="0" width="98%">
-    <thead>
-    <tr>
-        <th>DATE</th>
-        <th>TYPE</th>
-        <th>NAME</th>
-    </tr>
-    </thead>
-    <tfoot>
-    <tr>
-        <th>DATE</th>
-        <th>TYPE</th>
-        <th>NAME</th>
-    </tr>
-    </tfoot>
-</table> -->
 </form>
-
-
-        
 	
  <footer class="footer">
                 <p>&copy; Yaoshuai 2016</p>
             </footer>
-     
       </div>
+      
+      
 </body>
 </html>
