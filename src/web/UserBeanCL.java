@@ -4,6 +4,10 @@ package web;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 public class UserBeanCL {
 	private Connection ct=null;
 	private PreparedStatement ps=null;
@@ -24,7 +28,7 @@ public class UserBeanCL {
 	}
 	*/
 	//get user information after login
-	public UserBean GetUser(String uid){
+	public UserBean GetUser(String uid, HttpServletResponse response, String PassWord, String savetime, HttpSession session){
 		UserBean ub = new UserBean();
 		try{
 			ConnDB cd = new ConnDB();
@@ -33,10 +37,17 @@ public class UserBeanCL {
 			ps.setString(1, uid);
 			rs = ps.executeQuery();
 			if(rs.next()){
+				session.setAttribute("email",rs.getString(2));
 				ub.setName(rs.getString(1));
 				ub.setUserID(rs.getString(2));
 				//ub.setPassWord(rs.getString(3));
 				ub.setRank(rs.getInt(4));
+				 Cookie cid=new Cookie("email",rs.getString(2));  
+		         Cookie cpass=new Cookie("password",rs.getString(3));  
+		         cid.setMaxAge(Integer.parseInt(savetime));  
+		         cpass.setMaxAge(Integer.parseInt(savetime));  
+		         response.addCookie(cid);  
+		         response.addCookie(cpass);  
 			}
 		}
 		catch(Exception ex){

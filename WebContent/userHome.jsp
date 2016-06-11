@@ -3,14 +3,20 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<jsp:include page="CookieCheck.jsp"/> 
 <%
 String useremail = request.getParameter("Email");
 
-if(session.getAttribute(useremail)==null){
+if(session.getAttribute(useremail)==null || session.getAttribute("email") == null){
 //user did not login
 response.sendRedirect("signin.jsp");
-}
+}else{
 %>
+<h1> 您登录le！</h1>
+<%  
+}
+%>  
+
 
   <head>
     <title>userHome</title>
