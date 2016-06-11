@@ -30,11 +30,11 @@ public class LoginCL extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("loginCL");
 		try{
 		PrintWriter out = response.getWriter();
 		//out.println("Hello world!");
 		String Email = request.getParameter("email");
+		String savetime=request.getParameter("savetime"); 
 //		Email += "@stevens.edu";
 		//Email.toLowerCase();
 		String PassWord = request.getParameter("password");
@@ -42,7 +42,8 @@ public class LoginCL extends HttpServlet {
 		//Use UserBeanCL
 		UserBeanCL ubc=new UserBeanCL();
 		UserBean currU = new UserBean();
-		currU = ubc.GetUser(Email);
+		HttpSession session=request.getSession();
+		currU = ubc.GetUser(Email, response, PassWord, savetime, session);
 		if(ubc.CheckUser(Email, PassWord)){
 			//legal user
 			//create session in case of jump to welcome

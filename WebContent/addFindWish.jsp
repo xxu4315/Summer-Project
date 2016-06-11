@@ -2,6 +2,20 @@
     pageEncoding="UTF-8"%>
     <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<jsp:include page="CookieCheck.jsp"/> 
+<%
+//get userid from previous page
+String useremail = request.getParameter("email");
+//System.out.println(useremail+"  PH");
+if(session.getAttribute(useremail)==null && session.getAttribute("email") == null){
+//user did not login
+response.sendRedirect("signin.jsp");
+}
+if(request.getParameter("error")!=null){
+	out.println("<span style=coclor:red>"+request.getParameter("error")+"</span>");
+}
+
+%>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -387,19 +401,7 @@ function myFunction(response) {
 
 </head>
 <body>
-<%
-//get userid from previous page
-String useremail = request.getParameter("email");
-//System.out.println(useremail+"  PH");
-if(session.getAttribute(useremail)==null){
-//user did not login
-response.sendRedirect("signin.jsp");
-}
-System.out.println(request.getParameter("error"));
-if(request.getParameter("error")!=null){
-	out.println("<span style=coclor:red>"+request.getParameter("error")+"</span>");
-}
-%>
+
 <div class="container-fluid">
       <div class="header">
         <nav>
