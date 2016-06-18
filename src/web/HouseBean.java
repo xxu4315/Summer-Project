@@ -14,8 +14,15 @@ public class HouseBean {
 	private String title;
 	private String h_location;
 	private String h_area;
+	private String uimgpath;
 	private int state;
 	
+	public void setuimgpath(String ip){
+		this.uimgpath = ip;
+	}
+	public String getuimgpath(){
+		return this.uimgpath;
+	}
 	public void setstate(int state){
 		this.state=state;
 	}

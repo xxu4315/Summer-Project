@@ -46,11 +46,14 @@ function LowerCase(x){
         <input type="email" name=email id=inputEmail maxlength=50 class="form-control" onkeyup="LowerCase(this.id)" placeholder="@stevens.edu" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <select name="savetime">  
+        <!--<select name="savetime">  
                     <option value=<%=60*60%> selected>不保存</option>  
                     <option value=<%=24*60*60%>>一天</option>  
                     <option value=<%=24*60*60*7%>>一周</option>  
-                </select>
+                </select>-->
+        <label class="checkbox">
+        <input type="checkbox" name="savetime" value="<%=24*60*60*7%>" checked>Remember me
+        </label>
         <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit" onClick="document.login.action = '/LoginCL';">Sign in</button>
         <!--<button type=submit name="btnSubmit" id="btnSubmit" class="btn btn-info" style="font-size:80%" onClick="document.login.action = '/RegisterServlet';"><span style="font-size:100%">Activate your account</span></button>-->
         <div class="login-register">

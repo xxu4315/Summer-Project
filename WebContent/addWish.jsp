@@ -3,53 +3,69 @@
 
 
 <!DOCTYPE html>
+<jsp:include page="CookieCheck.jsp"/> 
 <%
 //get userid from previous page
 String useremail = request.getParameter("email");
+out.println(useremail);
 //System.out.println(useremail+"  PH");
-if(session.getAttribute(useremail)==null){
+if(session.getAttribute(useremail)==null && session.getAttribute("email") == null){
 //user did not login
 response.sendRedirect("signin.jsp");
 }
-System.out.println(request.getParameter("error"));
 if(request.getParameter("error")!=null){
 	out.println("<span style=coclor:red>"+request.getParameter("error")+"</span>");
 }
+
 %>
 <html lang="en">
   <head>
-    <title>Add Post</title>
-
-   
-   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <title>Add Post</title>  
+   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
-	<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="../static/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="../static/js/jquery-1.11.2.js"></script>
-
-	<script src="../static/js/jquery.ui.widget.js"></script>
-
-	<script type="text/javascript" src="../static/js/jquery.fileupload.js"></script>
-	<script type="text/javascript" src="../static/js/jquery.fileupload-process.js"></script>
-	<script type="text/javascript" src="../static/js/jquery.fileupload-ui.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/js/jquery.dynatable.js"></script>
+  	<script src="../static/js/jquery.ui.widget.js"></script>
+	  <script type="text/javascript" src="../static/js/jquery.fileupload.js"></script>
+	  <script type="text/javascript" src="../static/js/jquery.fileupload-process.js"></script>
+	  <script type="text/javascript" src="../static/js/jquery.fileupload-ui.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?&libraries=places&callback=initAutocomplete"
+        async defer></script>
     <script>
-        $(function() {
-            $('#fileupload').fileupload({
-            url: 'upload',
-            dataType: 'json',
-            add: function(e, data) {
-                data.submit();
-            },
-            success: function(response, status) {
-                $('#imgUpload').attr('src','static/Uploads/'+response.filename);
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
+       $(function () {
+        $(":file").change(function () {
+          if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+          }
         });
-        })
+      });
+      function imageIsLoaded(e) {
+        $('#imgUpload').attr('src', e.target.result);
+      };
+      </script>
+      <script>
+      var placeSearch, autocomplete;
+      function initAutocomplete() {
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete = new google.maps.places.Autocomplete(
+            // @type {!HTMLInputElement} 
+            (document.getElementById('h_location')),
+            {types: ['geocode']});
+
+      }
+
+      
+      
+
       </script>
       
     <style>
@@ -129,10 +145,7 @@ if(request.getParameter("error")!=null){
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
-        .well {
-        	
-        }
-
+        
     </style>
     
    
@@ -180,8 +193,8 @@ if(request.getParameter("error")!=null){
 <div class="well">
 <legend>Create Your Post</legend>
 
-<form name="form1" class="form-horizontal" role="form" method="post">
-<input type=hidden id=email name=email value="<%=request.getParameter("email") %>">
+<form id="form1" name="form1" class="form-horizontal" role="form" method="post" action="PostHouseCL" enctype="multipart/form-data">
+<input type="hidden" id="email" name="email" value="<%=request.getParameter("email")%>">
 
   <fieldset class="form-group">
     <label for="title">Title</label>
@@ -190,13 +203,14 @@ if(request.getParameter("error")!=null){
   </fieldset>
   <fieldset class="form-group">
     <label for="address">Address</label>
-    <input type="text" class="form-control" id="h_location" name="h_location" placeholder="Apt No. Street">
+    <input type="text" class="form-control" id="h_location" name="h_location" placeholder="Enter a location" >
   </fieldset>
   <fieldset class="form-group">
-  <label for="area">Area</label>
-  <div>
-  <select class="form-control pull-left" id="h_area" name="h_area" style="width:300px">
-         <option selected="true" disabled="disabled">Select Area</option>
+  <label for="area">City</label>
+  <div class="row">
+  <div class="col-sm-6 col-md-6"">  
+    <select class="form-control" id="h_area" name="h_area" style="width:300px">
+         <option selected="true" disabled="disabled">Select City</option>
   		 <option value="Jersey City">Jersey City</option>
   		 <option value="Union City">Union City</option>
   		 <option value="Hoboken">Hoboken</option>
@@ -205,7 +219,8 @@ if(request.getParameter("error")!=null){
          <option value="Jersey City">Other</option>
 		 </select>
 	</div>
-		 <span><input type="number" id="zipcode" name="zipcode" placeholder="ZIP Code"></span>
+		 <div class="col-sm-2 col-md-2"><input class="form-control" type="text" id="zipcode" name="zipcode" placeholder="ZIP Code" style="width:100px"></div>
+    </div>
 		 
 	</fieldset>
 	<fieldset class="form-group">
@@ -269,14 +284,17 @@ if(request.getParameter("error")!=null){
 	</fieldset>
   <fieldset class="form-group">
     <label for="houseinfo">House Info</label>
-    <textarea class="form-control" id="houseinfo" name="houseinfo" row="5"></textarea>
+    <textarea class="form-control" id="houseinfo" name="houseinfo" height="100"></textarea>
   </fieldset>
   <fieldset class="form-group">
   	<label for="price">Price</label>
-  	<div>
+    <div classs="input-group">
+  	<span class="left-inner-addon">
+    <i class="fa fa-usd"></i>
   	<input type="number" class="form-control" id="price" min="0" max="999999" name="price" style="width:200px"/>
-  	</div>
-  	<span>$/month</span><span style=color:red>*</span><br/>
+  	</span>
+    </div>
+  	<br/>
   </fieldset>
   <fieldset class="form-group">
   <label for="phoneNumber">Your Phone Number</label>
@@ -288,12 +306,14 @@ if(request.getParameter("error")!=null){
   </fieldset>
   <fieldset class="form-group">
  	<label for="QQ">QQ</label>
-  <input type="number" id="QQ" name="qq" class="form-control" maxlength="12" style="width:300px" >
+  <input type="text" id="QQ" name="qq" class="form-control" maxlength="12" style="width:300px" >
   </fieldset>
   
 
  <fieldset class="form-group">
- 	<label for="photos">Photos</label>
+ <label for="photos">Photos</label>
+Choose your photo:<input type="file" name="fileName"/><br/><input type="file" name="fileName"/>
+ 	<!--<label for="photos">Photos</label>
  	<span>
  	<div class="pull-right">
  		<img id="imgUpload" class="img-thumbnail"><input type="hidden" name="filePath" id="filePath">
@@ -305,14 +325,14 @@ if(request.getParameter("error")!=null){
             	Browse&hellip; <input class="pull-left" type="file" id="fileupload" name="file" multiple>
             </span>
         </span>
-    </div>
+    </div>-->
  </fieldset>
   
 
 <fieldset class="form-group">
   
     <p class="text-center">
-        <button style="font-size:150%" id="publish" name="publish" class="btn btn-primary" type="submit" onclick="validateForm()">Publish</button>
+        <button style="font-size:150%" id="publish" name="publish" class="btn btn-primary" type="button" onclick="validateForm()">Publish</button>
   	</p>
 </fieldset>
         </form>
@@ -354,9 +374,10 @@ if(request.getParameter("error")!=null){
       
               
                 else{
+                	alert("success!");
              	
               		
-                    document.form1.action="/PostHouseCL";
+                    document.form1.submit();
                 }
               }
               catch(err){

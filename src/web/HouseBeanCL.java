@@ -33,7 +33,7 @@ public class HouseBeanCL {
 	
 	
 	//store in database
-	public boolean posthouse(String email, String title, String h_location, String h_area, String housetype, String roomtype, String sex, String wechatid, String qq, String phonenumber, String price, String houseinfo){
+	public boolean posthouse(String email, String title, String h_location, String h_area, String housetype, String roomtype, String sex, String wechatid, String qq, String phonenumber, String price, String houseinfo, String uimgpath){
 		boolean flag = false;
 		int x;
 		try{
@@ -48,7 +48,7 @@ public class HouseBeanCL {
 				//PostHouseCL will deal with that
 			}
 			else{
-				ps = ct.prepareStatement("insert into houseinfo values("+"'"+email+"', "+"'"+title+"', "+"'"+h_location+"', "+"'"+h_area+"', "+"'"+housetype+"', "+"'"+roomtype+"', "+"'"+sex+"', "+"'"+wechatid+"', "+"'"+qq+"', "+"'"+phonenumber+"', "+"'"+price+"', "+"'"+houseinfo+"',"+" '1'"+")");
+				ps = ct.prepareStatement("insert into houseinfo values("+"'"+email+"', "+"'"+title+"', "+"'"+h_location+"', "+"'"+h_area+"', "+"'"+housetype+"', "+"'"+roomtype+"', "+"'"+sex+"', "+"'"+wechatid+"', "+"'"+qq+"', "+"'"+phonenumber+"', "+"'"+price+"', "+"'"+houseinfo+"',"+" '1', '"+uimgpath+"'"+")");
 				System.out.println(ps);
 				x = ps.executeUpdate();
 				flag = true;

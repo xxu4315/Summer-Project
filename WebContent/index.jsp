@@ -21,27 +21,7 @@
     		document.getElementById('inputEmail').value = t.toLowerCase();
     	}</script>
     <script type="text/javascript">
-    	$(document).ready(function () {
-    	    var elements = document.getElementsByTagName("input");
-    	    for (var i = 0; i < elements.length; i++) {
-    	        elements[i].oninvalid = function (e) {
-    	            e.target.setCustomValidity("");
-    	            if (!e.target.validity.valid) {
-    	                switch (e.srcElement.id) {
-    	                    case "inputEmail":
-    	                        e.target.setCustomValidity("Email cannot be blank");
-    	                        break;
-    	                    case "inputPassword":
-    	                        e.target.setCustomValidity("Password cannot be blank");
-    	                        break;
-    	                }
-    	            }
-    	        };
-    	        elements[i].oninput = function (e) {
-    	            e.target.setCustomValidity("");
-    	        };
-    	    }
-    	})
+    	
     	</script>
     	<script>
 // Variable to count number of attempts.
@@ -178,9 +158,9 @@ return false;
 											 <button id="btnSignIn" type="submit" class="btn btn-primary btn-block" onclick="validate();">Sign in</button>
 										</div>
 										<div class="checkbox">
-											 <label>
-											 <input type="checkbox"> keep me logged-in
-											 </label>
+											 <label class="checkbox">
+                        <input type="checkbox" name="savetime" value="<%=24*60*60*7%>" checked>Remember me
+                        </label>
 										</div>
 								 </form>
 							</div>

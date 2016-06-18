@@ -5,17 +5,19 @@
 <html lang="en">
 <jsp:include page="CookieCheck.jsp"/> 
 <%
+//get userid from previous page
 String useremail = request.getParameter("Email");
-
-if(session.getAttribute(useremail)==null || session.getAttribute("email") == null){
+out.println(useremail);
+//System.out.println(useremail+"  PH");
+if(session.getAttribute(useremail)==null && session.getAttribute("email") == null){
 //user did not login
 response.sendRedirect("signin.jsp");
-}else{
-%>
-<h1> 您登录le！</h1>
-<%  
 }
-%>  
+if(request.getParameter("error")!=null){
+	out.println("<span style=coclor:red>"+request.getParameter("error")+"</span>");
+}
+
+%> 
 
 
   <head>
@@ -73,13 +75,13 @@ response.sendRedirect("signin.jsp");
                    <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="height:40px">Add Post<span class="caret"></span></button>            
                     <ul class="dropdown-menu">
-                        <li><form action="/addWish.jsp" method="post"><input type=hidden id="hidden 1" name=email value="<%=request.getParameter("Email") %>"><button type="submit" class="btn btn-link">Housing</button></form></li>
+                        <li><form action="/addWish.jsp" method="post"><input type=hidden id="hidden 1" name="email" value="<%=request.getParameter("Email") %>"><button type="submit" class="btn btn-link">Housing</button></form></li>
                         <li><form action="/" method="post"><input type=hidden id="hidden 1" name=email value="<%=request.getParameter("Email") %>"><button type="submit" class="btn btn-link">Academics</button></form></li>
                         <li><form action="/" method="post"><input type=hidden id="hidden 1" name=email value="<%=request.getParameter("Email") %>"><button type="submit" class="btn btn-link">Dining</button></form></li>
                     </ul>
                     </div>
               </li>
-               <li role="presentation" ><a href="/index">Logout</a></li>
+               <li role="presentation" ><a href="/index.jsp">Logout</a></li>
           </ul>
         </nav>
           <h3 class="text-muted">Duck Life</h3>
@@ -87,13 +89,11 @@ response.sendRedirect("signin.jsp");
 <div class="container-fluid text-center">    
   <div class="row">
     <div class="col-sm-2 well">
-      <div class="well">
+      
         <p><a href="#">My Profile</a></p>
         <img src="/static/Uploads/Profile.jpg" class="img-circle" height="65" width="65" alt="Eric">
-      </div>
-      <div class="well">
-       
-      </div>
+      
+     
     
     </div>
     <div class="col-sm-8">
@@ -132,7 +132,7 @@ response.sendRedirect("signin.jsp");
           									<button type="submit" class="btn btn-link" style="font-size:150%">Find</button>
           									</form>
           									<form action="/addWish.jsp" method="post">
-          									<input type=hidden id="hidden 1" name=email value="<%=request.getParameter("Email") %>">
+          									<input type=hidden id="hidden 1" name="email" value="<%=request.getParameter("Email") %>">
           									<button type="submit" class="btn btn-link" style="font-size:150%">Post</button>
           									</form>
         									</div>
