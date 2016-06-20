@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="java.io.*"%>
+<%@ page import="java.util.*"%>
 <jsp:include page="CookieCheck.jsp"/> 
 <%
 //get userid from previous page
@@ -28,17 +30,12 @@ if(request.getParameter("error")!=null){
 
     <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700|Open+Sans+Condensed:700,300,300italic|Open+Sans:400,300italic,400italic,600,600italic,700,700italic,800,800italic|PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'/>
-    <!--<link rel="stylesheet" type="text/css" href="/static/css/mapStyle.css">-->
-    <!--<script type="text/javascript" src="/static/js/jquery.js"></script>-->
-    <!--<script type="text/javascript" src="/staticjs/map.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="../static/js/jquery-1.11.2.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
     <script type="text/javascript" src="../static/js/jquery.dynatable.js"></script>
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC9RiLfbcMSmMZr3b2Yum9XHGmXKKw2TOg&v=3.20&sensor=false""></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC9RiLfbcMSmMZr3b2Yum9XHGmXKKw2TOg"></script>
    
     <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -160,17 +157,21 @@ function parseResults()
 	var text = '{"housing":'+xmlHttp.responseText.toString()+"}";
 
 	var response = JSON.parse(text);
-	var Info = [][];
+	var Info = [];
 	var address = [];
+	//var image = "/static/Uploads/image2";
 	
 	for (var x in response.housing)
 	{
-	
-	Info.push('<div id="image">'+'<div class="list-group-item list-group-item-info" style="border-radius:6px">'+"<strong>"+"$"+" "+response.housing[x].price + "</strong>" +"</div>"+"<br>"+'<p style="margin-left:20px">'+response.housing[x].title +"<br>" + response.housing[x].h_area
+	//image.push(response.housing[x].uimgpath);
+	Info.push('<div id="image">'+'<div class="list-group-item list-group-item-info" style="border-radius:6px">'+"<strong>"+"$"+" "+response.housing[x].price + "</strong>" +"</div>"+"<br>"+'<p style="margin-left:20px">'+response.housing[x].title +'<img id="image" style="text-aligh:right; width:80px; height:80px" class="pull-right">'+"<br>" + response.housing[x].h_area
 	+"<br>" + response.housing[x].housetype+"<br>" + response.housing[x].roomtype+"<br>" + response.housing[x].h_location
 	+"<br>" + response.housing[x].sex+"<br>" + response.housing[x].phonenumber+"<br>"+ response.housing[x].id
 	+"<br>" + response.housing[x].houseinfo +"</p>"+"</div>");
+  //if (image[x] != null){
+  //$("#image").attr("src", image);}
 	address.push(response.housing[x].h_location+" "+response.housing[x].h_area+","+"NJ");
+	
 	}
 	Info.reverse();
 	address.reverse();
@@ -185,8 +186,6 @@ function parseResults()
 	}
 	document.getElementById("Results").innerHTML = Results;
 
-  initMap();
-
 	var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 14,
         center: {lat: -34.397, lng: 150.644}
@@ -198,8 +197,8 @@ function parseResults()
     });
 	var geocoder = new google.maps.Geocoder();
 	var infowindow = new google.maps.InfoWindow({  	    
-    	  	maxWidth: 250,
-    	  	maxHeight: 250,     	  	
+    	  	maxWidth: 350,
+    	  	maxHeight: 250    	  	
         });
 	geocoder.geocode({'address':"1"+" "+"Castle"+" "+"Point"+" "+"Terrace"+","+" "+"Hoboken"+" "+"NJ"}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
@@ -225,50 +224,16 @@ function parseResults()
 	          
 	            google.maps.event.addListener(marker,'click', function() {
 	            	infowindow.close();
-	            	infowindow.setContent('<div id="iw-container">'+'<div class="iw-title"></div>'+'<div class="iw-content">'+'<div class="iw-subTtile"></div>'+'<img src="/static/Uploads/image2.jpg" height="115" width="83">'+'<p>'+Info[e]+'</p>'+'<div class="iw-subTtile">Contacts</div>'+'<p>'+'<br>Phone. +551 254 4727<br>E-mail:yzhan65@stevens.edu<br>'+'</p>'+'</div>'+'<div class="iw-bottom-gradiant"></div>'+'</div>');
+	            	infowindow.setContent('<div id="iw-container">'+'<div class="iw-content">'+'<div class="iw-subTtile"></div>'+'<p>'+Info[e]+'</p>'+'<div class="iw-subTtile">Contacts</div>'+'<p>'+'<br>Phone. +551 254 4727<br>E-mail:yzhan65@stevens.edu<br>'+'</p>'+'</div>'+'<div class="iw-bottom-gradiant"></div>'+'</div>');
 	          	   	infowindow.open(map, this);
 	          	   console.log(e);
 	            });
-              google.maps.event.addListener(infowindow, function() {
-                var iwOuter = $('.gm-style-iw');
-                var iwBackground = iwOuter.prev();
-                iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-                iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-                iwOuter.parent().parent().css({left: '115px'});
-
-                // Moves the shadow of the arrow 76px to the left margin.
-                iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
-
-                // Moves the arrow 76px to the left margin.
-                iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
-
-                // Changes the desired tail shadow color.
-                iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
-
-                // Reference to the div that groups the close button elements.
-                var iwCloseBtn = iwOuter.next();
-
-                // Apply the desired effect to the close button
-                iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
-
-                // If the content of infowindow not exceed the set maximum height, then the gradient is removed.
-                if($('.iw-content').height() < 140){
-                  $('.iw-bottom-gradient').css({display: 'none'});
-                }
-
-                // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
-                iwCloseBtn.mouseout(function(){
-                  $(this).css({opacity: '1'});
-                });
-
-              });
-    
+            
 	        }
 	      });
 		}).call(this, e);
   }
-  
-		
+  	
 }
 </script>
 <script type="text/javascript">
@@ -373,10 +338,7 @@ function parseResults()
     width:55%;
     position:relative;
   }
-  #iw-container {
-    max-width: 250px;
-    max-height: 250px;
-    overflow-y:scroll;
+  #image {
 
   }
 
@@ -399,6 +361,24 @@ function parseResults()
     width:auto;
     position:relative;
   }
+  #iw-container {
+	margin-bottom: 10px;
+}
+#iw-container .iw-content {
+	font-size: 13px;
+	line-height: 18px;
+	font-weight: 200;
+	margin-right: 1px;
+	padding: 15px 5px 20px 15px;
+	max-height: 140px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.iw-subTitle {
+	font-size: 16px;
+	font-weight: 700;
+	padding: 5px 0;
+}
    
 </style>
 
@@ -542,7 +522,7 @@ function parseResults()
    <div id="map"> </div>
   </div>
   
-	<div class="col-sm-4-col-md-4" height="100%" width="35%" id="ResultContainer">
+	<div class="col-sm-4-col-md-4" id="ResultContainer">
   <div id="Results"></div>
   <!--<iframe frameborder="0" id="Results" name="Results">
 	</iframe>-->

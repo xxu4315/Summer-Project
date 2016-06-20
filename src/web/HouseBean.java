@@ -1,5 +1,8 @@
 package web;
 
+import java.io.File;
+import java.util.ArrayList;
+
 public class HouseBean {
 	
 	private String id;
@@ -16,15 +19,21 @@ public class HouseBean {
 	private String h_area;
 	private String uimgpath;
 	private int state;
+	//private ArrayList<String> uimgs = new ArrayList<String>();
 	
 	public void setuimgpath(String ip){
 		this.uimgpath = ip;
+	/*	File imgs = new File(this.uimgpath);
+        File[] tempList = imgs.listFiles();
+        for (File f : tempList) {
+        	uimgs.add(f.getPath()); */
+        
 	}
 	public String getuimgpath(){
-		return this.uimgpath;
+	   return this.uimgpath;
 	}
 	public void setstate(int state){
-		this.state=state;
+		this.state = state;
 	}
 	public int getstate(){
 		return this.state;
@@ -101,4 +110,5 @@ public class HouseBean {
 	public String gettitle(){
 		return this.title;
 	}
+	
 }

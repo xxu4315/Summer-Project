@@ -27,6 +27,7 @@ if(request.getParameter("error")!=null){
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <link href="../static/css/sb-admin-2.css" rel="stylesheet">
     <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
     <script src="../static/js/jquery-1.11.2.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -35,7 +36,7 @@ if(request.getParameter("error")!=null){
 	  <script type="text/javascript" src="../static/js/jquery.fileupload.js"></script>
 	  <script type="text/javascript" src="../static/js/jquery.fileupload-process.js"></script>
 	  <script type="text/javascript" src="../static/js/jquery.fileupload-ui.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?&libraries=places&callback=initAutocomplete"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9RiLfbcMSmMZr3b2Yum9XHGmXKKw2TOg&libraries=places&callback=initAutocomplete"
         async defer></script>
     <script>
        $(function () {
@@ -53,6 +54,15 @@ if(request.getParameter("error")!=null){
       </script>
       <script>
       var placeSearch, autocomplete;
+      var componentForm = {
+      //street_number: 'short_name',
+      //route: 'long_name',
+      locality: 'long_name',
+      //administrative_area_level_1: 'short_name',
+      //country: 'long_name',
+      postal_code: 'short_name'
+    };
+
       function initAutocomplete() {
         // Create the autocomplete object, restricting the search to geographical
         // location types.
@@ -60,10 +70,64 @@ if(request.getParameter("error")!=null){
             // @type {!HTMLInputElement} 
             (document.getElementById('h_location')),
             {types: ['geocode']});
+        autocomplete.addListener('place_changed', fillInAddress);
 
       }
+      function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+        //var address = document.getElementById("h_location").value;
+        var address = document.getElementById("h_location").value;
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            var coordinate = results[0].geometry.location;
+            document.getElementById("coordinate").value =  coordinate;
+          } else {
 
-      
+            alert('Geocode was not successful for the following reason: ' + status);
+            
+          }
+          });
+
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+          }
+        }
+      }
+
+
+
+      /*function geocoding() {
+      try {
+        var address = document.getElementById("h_location").value;
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            var coordinate = results[0].geometry.location;
+            document.getElementById("coordinate").value =  coordinate;
+            validateForm();
+
+            return true;
+                
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+            return false;
+          }
+       });
+      }
+      catch (error) {
+        alert("please input a valide address");
+      }
+      }*/
+
+
       
 
       </script>
@@ -203,13 +267,14 @@ if(request.getParameter("error")!=null){
   </fieldset>
   <fieldset class="form-group">
     <label for="address">Address</label>
-    <input type="text" class="form-control" id="h_location" name="h_location" placeholder="Enter a location" >
+    <input type="text" class="form-control" id="h_location" name="h_location" placeholder="Enter a location" ><span><input class="form-control" type="text" id="coordinate" name="coordinate" style="width:200px"></span>
   </fieldset>
   <fieldset class="form-group">
   <label for="area">City</label>
   <div class="row">
-  <div class="col-sm-6 col-md-6"">  
-    <select class="form-control" id="h_area" name="h_area" style="width:300px">
+  <div class="col-sm-3 col-md-3"> 
+  <input class="form-control" id="locality" style="width:200px" type="text" name="h_area">
+    <!--<select class="form-control" id="h_area" name="h_area" style="width:300px">
          <option selected="true" disabled="disabled">Select City</option>
   		 <option value="Jersey City">Jersey City</option>
   		 <option value="Union City">Union City</option>
@@ -217,12 +282,11 @@ if(request.getParameter("error")!=null){
   		 <option value="Weehawken">Weehawken</option>
   		 <option value="New Port">New Port</option>
          <option value="Jersey City">Other</option>
-		 </select>
+		 </select>-->
 	</div>
-		 <div class="col-sm-2 col-md-2"><input class="form-control" type="text" id="zipcode" name="zipcode" placeholder="ZIP Code" style="width:100px"></div>
+		 <div class="col-sm-2 col-md-2"><input class="form-control" type="text" id="postal_code" name="postal_code" placeholder="ZIP Code" style="width:85px; margin-left:50px"></div>
     </div>
-		 
-	</fieldset>
+    </fieldset>
 	<fieldset class="form-group">
 	<label for="housetype">House Type</label>
     <select class="form-control" id="house_type" required="required" style="width:300px" name="housetype">
@@ -350,9 +414,10 @@ Choose your photo:<input type="file" name="fileName"/><br/><input type="file" na
                   
                 var x1 = document.getElementById('title').value;
                 var x2 = document.getElementById('h_location').value;
-                var e3 = document.getElementById('h_area');
-                var x3 = e3.options[e3.selectedIndex].value;
-                var s3 = e3.selectedIndex;
+                //var e3 = document.getElementById('h_area');
+                //var x3 = e3.options[e3.selectedIndex].value;
+                //var s3 = e3.selectedIndex;
+                var x3 = document.getElementById('locality').value;
                 var e4 = document.getElementById('house_type');
                 var x4 = e4.options[e4.selectedIndex].value;
                 var s4 = e4.selectedIndex;
@@ -363,21 +428,20 @@ Choose your photo:<input type="file" name="fileName"/><br/><input type="file" na
                 var x8 = e8.options[e8.selectedIndex].value;
                 var s8 = e8.selectedIndex;
                 var x9 = document.getElementById('price').value;                
-               /* var e9 = document.getElementById('req_gender');
-                var x9 = e9.options[e9.selectedIndex].value;
-                var s9 = e9.selectedIndex;*/
-            
+        
     
-                if (x1 == "" || x2 == "" || x9 == "" || (s3&&s4&&s6&&s8) == 0) {
+                if (x1 == "" || x2 == "" || x3 =="" || x9 == "" || (s4&&s6&&s8) == 0) {
                   alert("Required fields must be filled out!");
                 }
       
               
                 else{
                 	alert("success!");
+                  
+
              	
               		
-                    document.form1.submit();
+                  document.form1.submit();
                 }
               }
               catch(err){

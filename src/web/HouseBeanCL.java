@@ -91,7 +91,8 @@ public class HouseBeanCL {
 					obj.setsex(rs.getString("sex"));
 					obj.setwechatid(rs.getString("wechatid"));
 					obj.seth_location(rs.getString("h_location"));
-					obj.seth_area(rs.getString("h_area"));					
+					obj.seth_area(rs.getString("h_area"));		
+					obj.setuimgpath(rs.getString("uimgpath"));
 					houseList.add(obj);
 				}
 			
