@@ -10,9 +10,9 @@ public class ConnDB {
 			//upload drivers
 			Class.forName("org.postgresql.Driver").newInstance();
 			//get connections
-			String url="jdbc:postgresql://127.0.0.1:3307/postgres";
+			String url="jdbc:postgresql://127.0.0.1:5433/MyWeb";
 	        String user="postgres";
-	        String pwd="890312";
+	        String pwd="111";
 			ct=DriverManager.getConnection(url,user,pwd);
 		}
 		catch(Exception ex){

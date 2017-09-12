@@ -138,7 +138,7 @@ public class UserBeanCL {
 			//get connection
 			ConnDB cd=new ConnDB();
 			ct=cd.getConn();
-			ps=ct.prepareStatement("select * from webuser where id=?");
+			ps=ct.prepareStatement("select * from webuser where id=? and state = '1'");
 			ps.setString(1, u);
 			rs=ps.executeQuery();
 			if(rs.next()){

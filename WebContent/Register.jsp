@@ -50,10 +50,10 @@ var temp = request.getAttribute("error");
 document.write(temp);
 </script>
 <form action=RegisterCL id=0 name=registerform method=post>
-		stevens-email:<input type=text id=1 maxlength=20 name=userid onkeyup="LowerCase(this.id)" required=required/><span style=color:red>*</span><br/>  
-        username:<input type=text id=2 maxlength=20 name=username required=required><span style=color:red>*</span><br/>  
-        password:<input type=password id=3 maxlength=20 name=password required=required><span style=color:red>*</span><br/>
-        password again:<input type=password id=4 maxlength=20 name=password required=required><span style=color:red>*</span><br/>  
+		stevens-email:<input type=text id=1 maxlength=200 name=userid onkeyup="LowerCase(this.id)" required=required/><span style=color:red>*</span><br/>  
+        username:<input type=text id=2 maxlength=200 name=username required=required><span style=color:red>*</span><br/>  
+        password:<input type=password id=3 maxlength=200 name=password required=required><span style=color:red>*</span><br/>
+        password again:<input type=password id=4 maxlength=200 name=password required=required><span style=color:red>*</span><br/>  
         <input type=button value=register onclick="dosubmit();"/>  <input type=reset value=reset> 
     </form>  
     <a href="http://localhost:8080/MyWeb/Login.jsp" target=_self >Already have a account? Login in here</a>
