@@ -1,6 +1,7 @@
 //get connections from database
 package web;
 // love xiaochen
+//Teacher Lu
 import java.sql.*;
 
 public class ConnDB {
